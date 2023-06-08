@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static data.Urls.URL_USERS;
 import static org.hamcrest.Matchers.equalTo;
 
-public class GetUserTests extends TesBase{
+public class GetUserTests extends TestBase {
 
     @Test
     public void positiveGetUsersTest() {

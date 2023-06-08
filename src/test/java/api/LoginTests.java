@@ -13,7 +13,7 @@ import static data.Urls.URL_USERS;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class LoginTests extends TesBase{
+public class LoginTests extends TestBase {
     User user = new User();
     Faker faker = new Faker();
 

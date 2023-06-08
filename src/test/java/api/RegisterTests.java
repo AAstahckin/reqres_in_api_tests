@@ -11,7 +11,7 @@ import static data.TestDataParams.TOKEN;
 import static data.Urls.URL_REGISTER;
 import static org.hamcrest.Matchers.equalTo;
 
-public class RegisterTests extends TesBase{
+public class RegisterTests extends TestBase {
     User user = new User();
     Faker faker = new Faker();
 
