@@ -1,53 +1,47 @@
 package api;
 
+import api.models.RegisterBodyModel;
+import api.models.RegisterResponseModel;
 import api.service.Requests;
 import com.github.javafaker.Faker;
-import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import java.util.stream.Stream;
 import static data.ErrorsTexts.*;
 import static data.TestDataParams.LOGIN;
 import static data.TestDataParams.TOKEN;
-import static data.Urls.URL_REGISTER;
-import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegisterTests extends TestBase {
-    User user = new User();
+    RegisterBodyModel bodyModel = new RegisterBodyModel();
     Faker faker = new Faker();
 
     @Test
-    public void negativeOnlyDefinedTest() {
-        user.setEmail(faker.internet().emailAddress());
-        user.setPassword(faker.artist().name());
-        ValidatableResponse response = Requests.postRequest(user, URL_REGISTER.getUrl());
-        response.statusCode(400);
-        response.assertThat().body("error", equalTo(ONLY_DEFINED.getValue()));
-    }
-
-    @Test
     public void positiveRegisterTest() {
-        user.setEmail(LOGIN.getValue());
-        user.setPassword(faker.artist().name());
-        ValidatableResponse response = Requests.postRequest(user, URL_REGISTER.getUrl());
-        response.statusCode(200);
-        response.assertThat().body("id", equalTo(4));
-        response.assertThat().body("token", equalTo(TOKEN.getValue()));
+        bodyModel.setEmail(LOGIN.getValue());
+        bodyModel.setPassword(faker.artist().name());
+        RegisterResponseModel response = Requests.postRegisterRequest(bodyModel, 200);
+        assertEquals(response.getId(), 4);
+        assertEquals(response.getToken(), TOKEN.getValue());
     }
 
-    @Test
-    public void negativeMissingPasswordTest() {
-        user.setEmail(LOGIN.getValue());
-        ValidatableResponse response = Requests.postRequest(user, URL_REGISTER.getUrl());
-        response.statusCode(400);
-        response.assertThat().body("error", equalTo(MISSING_PASSWORD.getValue()));
+    @ParameterizedTest(name = "Проверка негативных сценариев api/register с 400 кодом | [user: {0}; pass:{1}]")
+    @MethodSource("submitIncorrectParameters")
+    public void negativeTest(String user, String pass, String responseErrorText) {
+        bodyModel.setEmail(user);
+        bodyModel.setPassword(pass);
+        RegisterResponseModel response = Requests.postRegisterRequest(bodyModel, 400);
+        assertEquals(response.getError(), responseErrorText);
     }
 
-    @Test
-    public void negativeMissingEmailOrUsernameTest8() {
-        user.setPassword(faker.artist().name());
-        ValidatableResponse response = Requests.postRequest(user, URL_REGISTER.getUrl());
-        response.statusCode(400);
-        response.assertThat().body("error", equalTo(MISSING_EMAIL_OR_USERNAME.getValue()));
+    private static Stream<Arguments> submitIncorrectParameters() {
+        Faker fakerValue = new Faker();
+        return Stream.of(
+                Arguments.of(LOGIN.getValue(), "", MISSING_PASSWORD.getValue()),
+                Arguments.of("", fakerValue.artist().name(), MISSING_EMAIL_OR_USERNAME.getValue()),
+                Arguments.of(fakerValue.internet().emailAddress(), fakerValue.artist().name(), ONLY_DEFINED.getValue()));
     }
 
 }
