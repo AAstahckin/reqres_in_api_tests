@@ -13,7 +13,6 @@ import static api.constans.TimeFormatConstants.DD_MM_YYYY_HH_MM;
 public class DateTimeCheck {
 
     public static void differenceTime(String checkedDate, String comparedDate, String dateFormat) {
-        System.out.println(checkedDate + " " + comparedDate);
         SimpleDateFormat format = new SimpleDateFormat(dateFormat);
         try {
 
@@ -21,7 +20,6 @@ public class DateTimeCheck {
             Date d2 = format.parse(comparedDate);
             long diff = Math.abs(d1.getTime() - d2.getTime());
             long diffMinutes = TimeUnit.MINUTES.convert(diff, TimeUnit.MILLISECONDS);
-            System.out.println(diffMinutes);
             boolean temp;
             if (diffMinutes >= 0 && diffMinutes <= 1) {
                 temp = true;
@@ -36,7 +34,7 @@ public class DateTimeCheck {
 
     public static void timeDifferenceCreateForServ(String dateCreate) {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, -3);
+        calendar.add(Calendar.HOUR_OF_DAY, Calendar.AM);
         String dateLocal = new SimpleDateFormat(DD_MM_YYYY_HH_MM.getTimeFormat()).format(calendar.getTime());
         Allure.step("Проверка разница во времени: " + dateCreate+ " : " + dateLocal);
         differenceTime(dateCreate, dateLocal, DD_MM_YYYY_HH_MM.getTimeFormat());
