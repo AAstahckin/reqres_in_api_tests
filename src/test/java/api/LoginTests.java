@@ -14,10 +14,10 @@ import java.util.stream.Stream;
 
 import static api.specs.Specs.response200Spec;
 import static api.specs.Specs.response400Spec;
-import static data.ErrorsTexts.*;
+import static api.constans.ErrorsTexts.*;
 import static data.TestLoginDataParams.LOGIN;
 import static data.TestLoginDataParams.TOKEN;
-import static data.Urls.URL_LOGIN;
+import static api.constans.Urls.URL_LOGIN;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

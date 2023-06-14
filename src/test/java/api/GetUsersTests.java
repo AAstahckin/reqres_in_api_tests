@@ -16,9 +16,9 @@ import java.util.stream.Stream;
 
 import static api.specs.Specs.response200Spec;
 import static api.utils.RandomUtils.getRandomUserForId;
-import static data.OtherTexts.TEXT_SUPPORT;
-import static data.OtherTexts.URL_SUPPORT;
-import static data.Urls.URL_USERS;
+import static api.constans.OtherTexts.TEXT_SUPPORT;
+import static api.constans.OtherTexts.URL_SUPPORT;
+import static api.constans.Urls.URL_USERS;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

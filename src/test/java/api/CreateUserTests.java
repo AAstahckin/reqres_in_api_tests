@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static api.specs.Specs.response201Spec;
 import static api.utils.DateTimeCheck.timeDifferenceCreateForServ;
-import static data.Urls.URL_USERS;
+import static api.constans.Urls.URL_USERS;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.*;
 
