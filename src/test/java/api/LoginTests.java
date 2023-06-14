@@ -4,35 +4,45 @@ import api.models.LoginBodyModel;
 import api.models.LoginResponseModel;
 import api.service.Requests;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Description;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
+
+import static api.specs.Specs.response200Spec;
+import static api.specs.Specs.response400Spec;
 import static data.ErrorsTexts.*;
-import static data.TestDataParams.LOGIN;
-import static data.TestDataParams.TOKEN;
+import static data.TestLoginDataParams.LOGIN;
+import static data.TestLoginDataParams.TOKEN;
+import static data.Urls.URL_LOGIN;
+import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginTests extends TestBase {
+@DisplayName("Авторизация API /login")
+public class LoginTests {
     LoginBodyModel loginBody = new LoginBodyModel();
     Faker faker = new Faker();
 
     @Test
+    @DisplayName("Проверка авторизации пользователя API /login")
+    @Description("Авторизация")
     public void positiveLoginTest() {
-        loginBody.setEmail(LOGIN.getValue());
-        loginBody.setPassword(faker.artist().name());
-        LoginResponseModel response = Requests.postLoginRequest(loginBody, 200);
-        assertEquals(response.getToken(), TOKEN.getValue());
+        loginBody.setEmail(LOGIN.getValue()).setPassword(faker.artist().name());
+        LoginResponseModel response = Requests.sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response200Spec);
+        step("Проверяем что присутствует token : " + TOKEN.getValue(), () -> assertEquals(response.getToken(), TOKEN.getValue()));
     }
 
-    @ParameterizedTest(name = "Проверка негативных сценариев api/login с 400 кодом | [user: {0}; pass:{1}]")
+    @DisplayName("Проверка негативных сценариев с 400 кодом API /login")
+    @Description("Проверка негативных сценариев с 400")
+    @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
     public void negativeTest(String user, String pass, String responseErrorText) {
-        loginBody.setEmail(user);
-        loginBody.setPassword(pass);
-        LoginResponseModel response = Requests.postLoginRequest(loginBody, 400);
-        assertEquals(response.getError(), responseErrorText);
+        loginBody.setEmail(user).setPassword(pass);
+        LoginResponseModel response = Requests.sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response400Spec);
+        step("Проверяем что присутствует ошибка : " + responseErrorText, () -> assertEquals(response.getError(), responseErrorText));
     }
 
     private static Stream<Arguments> submitIncorrectParameters() {

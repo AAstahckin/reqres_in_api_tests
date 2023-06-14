@@ -1,5 +1,6 @@
-package api.helpers;
+package api.utils;
 
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.Assertions;
 
 import java.text.SimpleDateFormat;
@@ -33,10 +34,11 @@ public class DateTimeCheck {
         }
     }
 
-    public static void timeDifferenceCreateForServ(String dateCreate, int serverDate) {
+    public static void timeDifferenceCreateForServ(String dateCreate) {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, serverDate);
+        calendar.add(Calendar.HOUR_OF_DAY, -3);
         String dateLocal = new SimpleDateFormat(DD_MM_YYYY_HH_MM.getTimeFormat()).format(calendar.getTime());
+        Allure.step("Проверка разница во времени: " + dateCreate+ " : " + dateLocal);
         differenceTime(dateCreate, dateLocal, DD_MM_YYYY_HH_MM.getTimeFormat());
     }
 

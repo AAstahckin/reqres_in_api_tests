@@ -1,23 +1,45 @@
 plugins {
-    id 'java-library'
-    id "io.freefair.lombok" version "6.0.0-m2"
+    id 'java'
+    id 'io.qameta.allure' version '2.10.0'
+    id 'io.freefair.lombok' version '6.0.0-m2'
 }
+
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-def restAssuredVersion = "5.3.0",
-    slf4jVersion = "2.0.7"
+def allureVersion = "2.22.1",
+        restAssuredVersion = "5.3.0",
+        validatorRestAssuredVersion = "5.3.0",
+        javaFakerVersion = "1.0.2",
+        jupiterVersion = "5.9.2",
+        assertjCoreVersion = "3.24.2"
+
+        allure {
+    report {
+        version.set("${allureVersion}")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set("${allureVersion}")
+            }
+        }
+    }
+}
 
 dependencies {
-    testImplementation (
-            "io.rest-assured:rest-assured:$restAssuredVersion",
-            "io.rest-assured:json-schema-validator:$restAssuredVersion",
-            "org.junit.jupiter:junit-jupiter:5.9.2",
-            "org.slf4j:slf4j-simple:$slf4jVersion",
-            "com.github.javafaker:javafaker:1.0.2",
-            "org.assertj:assertj-core:3.24.2"
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:${jupiterVersion}",
+            "io.rest-assured:rest-assured:${restAssuredVersion}",
+            "io.rest-assured:json-schema-validator:${validatorRestAssuredVersion}",
+            "com.github.javafaker:javafaker:${javaFakerVersion}",
+            "org.slf4j:slf4j-simple:2.0.5",
+            "io.qameta.allure:allure-rest-assured:${allureVersion}",
+            "org.assertj:assertj-core:${assertjCoreVersion}"
     )
 }
 
