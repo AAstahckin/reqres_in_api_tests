@@ -1,6 +1,6 @@
 package api;
 
-import api.models.getusers.UsersResponse;
+import api.models.getusers.UsersResponseModel;
 import api.service.Requests;
 import data.UsersDataValues;
 import io.qameta.allure.Allure;
@@ -30,7 +30,7 @@ public class GetUsersTests {
     @ParameterizedTest(name = "Проверка возвращения элементов по атрибуту per_page")
     @EnumSource(value = UsersDataValues.class)
     public void testsGetUsers(UsersDataValues usersDataValues) {
-        UsersResponse response = Requests.sendGetRequest(URL_USERS.getUrl() + "?per_page=" + usersDataValues.getId(), UsersResponse.class, response200Spec);
+        UsersResponseModel response = Requests.sendGetRequest(URL_USERS.getUrl() + "?per_page=" + usersDataValues.getId(), UsersResponseModel.class, response200Spec);
         step("Проверяем колличество возвращаемых элементов", () -> assertEquals(response.getData().size(), usersDataValues.getId()));
         step("Проверяем что в ответе изменилось значение ключа per_page", () -> assertEquals(response.getPerPage(), usersDataValues.getId()));
         Allure.step("Проверяем объект support");
@@ -43,7 +43,7 @@ public class GetUsersTests {
     @ParameterizedTest(name = "Проверка возвращения элементов по атрибуту page")
     @MethodSource("checkOutputParamsForPage")
     public void testsGetUsers1(int page, int count) {
-        UsersResponse response = Requests.sendGetRequest(URL_USERS.getUrl() + "?page=" + page, UsersResponse.class, response200Spec);
+        UsersResponseModel response = Requests.sendGetRequest(URL_USERS.getUrl() + "?page=" + page, UsersResponseModel.class, response200Spec);
         step("Проверяем колличество возвращаемых элементов" + count, () -> assertEquals(response.getData().size(), count));
         step("Проверяем что меняется page при запросе ?page=" + page, () -> assertEquals(response.getPage(), page));
     }
@@ -59,7 +59,7 @@ public class GetUsersTests {
     @Description("Проверка пользователя")
     void getUsersTests() {
         UsersDataValues randomUserId = getRandomUserForId();
-        UsersResponse response = Requests.sendGetRequest(URL_USERS.getUrl() + "?per_page=" + UsersDataValues.values().length, UsersResponse.class, response200Spec);
+        UsersResponseModel response = Requests.sendGetRequest(URL_USERS.getUrl() + "?per_page=" + UsersDataValues.values().length, UsersResponseModel.class, response200Spec);
         Allure.step("Проверяем рандомного пользователя с id : " + randomUserId.getId());
         assertEquals(response.getData().get(randomUserId.ordinal()).getId(), randomUserId.getId());
         assertEquals(response.getData().get(randomUserId.ordinal()).getEmail(), randomUserId.getEmail());

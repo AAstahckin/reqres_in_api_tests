@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UsersResponse {
+public class UsersResponseModel {
 
 	@JsonProperty("per_page")
 	private int perPage;
@@ -17,7 +17,7 @@ public class UsersResponse {
 	private int total;
 
 	@JsonProperty("data")
-	private List<DataItem> data;
+	private List<DataItemResponseModel> data;
 
 	@JsonProperty("page")
 	private int page;
@@ -26,5 +26,5 @@ public class UsersResponse {
 	private int totalPages;
 
 	@JsonProperty("support")
-	private Support support;
+	private SupportResponseModel support;
 }

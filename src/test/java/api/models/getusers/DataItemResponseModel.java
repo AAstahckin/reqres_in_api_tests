@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DataItem{
+public class DataItemResponseModel {
 
 	@JsonProperty("last_name")
 	private String lastName;
