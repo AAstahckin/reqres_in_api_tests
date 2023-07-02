@@ -17,5 +17,4 @@ public class DeleteUserTests extends TestBase {
     public void deleteUsersTests(String userId) {
         sendDeleteUserRequest(URL_USER.getUrl(), userId);
     }
-
 }
