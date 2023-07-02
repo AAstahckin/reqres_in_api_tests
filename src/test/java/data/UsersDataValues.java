@@ -1,5 +1,8 @@
 package data;
 
+import lombok.Getter;
+
+@Getter
 public enum UsersDataValues {
 
     GEORGE_BLUTH(1, "george.bluth@reqres.in", "George", "Bluth", "https://reqres.in/img/faces/1-image.jpg"),
@@ -29,23 +32,4 @@ public enum UsersDataValues {
         this.avatar = avatar;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
 }

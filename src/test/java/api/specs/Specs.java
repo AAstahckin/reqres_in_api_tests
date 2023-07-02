@@ -39,4 +39,10 @@ public class Specs {
             .expectStatusCode(BAD_REQUEST.getCode())
             .build();
 
+    public static ResponseSpecification response404Spec = new ResponseSpecBuilder()
+            .log(STATUS)
+            .log(BODY)
+            .expectStatusCode(NOT_FOUND.getCode())
+            .build();
+
 }

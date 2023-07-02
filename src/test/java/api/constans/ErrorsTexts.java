@@ -1,5 +1,8 @@
 package api.constans;
 
+import lombok.Getter;
+
+@Getter
 public enum ErrorsTexts {
 
     ONLY_DEFINED("Note: Only defined users succeed registration"),
@@ -11,10 +14,6 @@ public enum ErrorsTexts {
 
     ErrorsTexts(String value) {
         this.value = value;
-    }
-
-    public String getValue() {
-        return value;
     }
 
 }

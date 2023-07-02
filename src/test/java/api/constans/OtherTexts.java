@@ -1,5 +1,8 @@
 package api.constans;
 
+import lombok.Getter;
+
+@Getter
 public enum OtherTexts {
 
     URL_SUPPORT("https://reqres.in/#support-heading"),
@@ -9,10 +12,6 @@ public enum OtherTexts {
 
     OtherTexts(String value) {
         this.value = value;
-    }
-
-    public String getValue() {
-        return value;
     }
 
 }

@@ -34,10 +34,10 @@ public class DateTimeCheck {
 
     public static void timeDifferenceCreateForServ(String dateCreate) {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, Calendar.AM);
-        String dateLocal = new SimpleDateFormat(DD_MM_YYYY_HH_MM.getTimeFormat()).format(calendar.getTime());
+        calendar.add(Calendar.HOUR_OF_DAY, -3);
+        String dateLocal = new SimpleDateFormat(DD_MM_YYYY_HH_MM.getValue()).format(calendar.getTime());
         Allure.step("Проверка разница во времени: " + dateCreate+ " : " + dateLocal);
-        differenceTime(dateCreate, dateLocal, DD_MM_YYYY_HH_MM.getTimeFormat());
+        differenceTime(dateCreate, dateLocal, DD_MM_YYYY_HH_MM.getValue());
     }
 
 }

@@ -17,7 +17,7 @@ public class UsersResponseModel {
 	private int total;
 
 	@JsonProperty("data")
-	private List<DataItemResponseModel> data;
+	private List<DataUsersResponseModel> data;
 
 	@JsonProperty("page")
 	private int page;
@@ -26,5 +26,5 @@ public class UsersResponseModel {
 	private int totalPages;
 
 	@JsonProperty("support")
-	private SupportResponseModel support;
+	private UsersSupportResponseModel support;
 }

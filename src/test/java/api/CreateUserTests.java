@@ -5,9 +5,11 @@ import api.models.CreateUsersBodyModel;
 import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
+import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static api.responseassertions.AssertionsResponseCreateUserApi.assertPositiveCreateUserApi;
 import static api.specs.Specs.response201Spec;
 import static api.utils.DateTimeCheck.timeDifferenceCreateForServ;
 import static api.constans.Urls.URL_USERS;
@@ -25,11 +27,10 @@ public class CreateUserTests {
     @Description("Создание юзера")
     public void positiveCreateUserTest() {
         userBody.setName(faker.name().firstName()).setJob(faker.job().position());
-        CreateUserResponseModel response = Requests.sendPostRequest(URL_USERS.getUrl(), userBody, CreateUserResponseModel.class, response201Spec);
-        step("Проверяем что " + userBody.getName() + " присутствует в ответе ", () -> assertEquals(response.getName(), userBody.getName()));
-        step("Проверяем что " + userBody.getJob() + " присутствует в ответе ", () -> assertEquals(response.getJob(), userBody.getJob()));
-        step("Проверяем что " + response.getId() + " присутствует в ответе", () -> assertNotNull(response.getId()));
-        timeDifferenceCreateForServ(response.getCreatedAt());
+        val response = Requests.sendPostRequest(
+                URL_USERS.getUrl(), userBody, CreateUserResponseModel.class, response201Spec);
+        assertPositiveCreateUserApi(response, userBody);
+
     }
 
 }

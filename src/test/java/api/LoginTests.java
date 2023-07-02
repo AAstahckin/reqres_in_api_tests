@@ -5,6 +5,7 @@ import api.models.LoginResponseModel;
 import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
+import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,17 +13,16 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
+import static api.responseassertions.AssertionsResponseLoginApi.*;
 import static api.specs.Specs.response200Spec;
 import static api.specs.Specs.response400Spec;
 import static api.constans.ErrorsTexts.*;
 import static data.TestLoginDataParams.LOGIN;
-import static data.TestLoginDataParams.TOKEN;
 import static api.constans.Urls.URL_LOGIN;
-import static io.qameta.allure.Allure.step;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Авторизация API /login")
 public class LoginTests {
+
     LoginBodyModel loginBody = new LoginBodyModel();
     Faker faker = new Faker();
 
@@ -31,18 +31,18 @@ public class LoginTests {
     @Description("Авторизация")
     public void positiveLoginTest() {
         loginBody.setEmail(LOGIN.getValue()).setPassword(faker.artist().name());
-        LoginResponseModel response = Requests.sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response200Spec);
-        step("Проверяем что присутствует token : " + TOKEN.getValue(), () -> assertEquals(response.getToken(), TOKEN.getValue()));
+        val response = Requests.sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response200Spec);
+        assertPositiveLoginApi(response);
     }
 
     @DisplayName("Проверка негативных сценариев с 400 кодом API /login")
     @Description("Проверка негативных сценариев с 400")
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
-    public void negativeTest(String user, String pass, String responseErrorText) {
+    public void negativeLoginTest(String user, String pass, String responseErrorText) {
         loginBody.setEmail(user).setPassword(pass);
-        LoginResponseModel response = Requests.sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response400Spec);
-        step("Проверяем что присутствует ошибка : " + responseErrorText, () -> assertEquals(response.getError(), responseErrorText));
+        val response = Requests.sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response400Spec);
+        assertNegativeLoginApi(response, responseErrorText);
     }
 
     private static Stream<Arguments> submitIncorrectParameters() {

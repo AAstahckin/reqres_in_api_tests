@@ -1,19 +1,20 @@
 package api.constans;
 
+import lombok.Getter;
+
+@Getter
 public enum Urls {
 
     URL_REGISTER("/register"),
     URL_LOGIN("/login"),
+    URL_USER("/users/"),
     URL_USERS("/users");
 
-    final String value;
+    final String url;
 
-    Urls(String value) {
-        this.value = value;
+    Urls(String url) {
+        this.url = url;
     }
 
-    public String getUrl() {
-        return value;
-    }
 
 }
