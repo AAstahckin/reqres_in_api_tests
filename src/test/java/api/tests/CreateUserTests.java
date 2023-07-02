@@ -1,8 +1,7 @@
-package api;
+package api.tests;
 
 import api.models.CreateUserResponseModel;
 import api.models.CreateUsersBodyModel;
-import api.models.LoginResponseModel;
 import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
@@ -15,17 +14,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static api.constans.ErrorsTexts.*;
-import static api.constans.Urls.URL_LOGIN;
 import static api.responseassertions.AssertionsResponseCreateUserApi.assertPositiveCreateUserApi;
-import static api.responseassertions.AssertionsResponseLoginApi.assertNegativeLoginApi;
 import static api.specs.Specs.response201Spec;
-import static api.specs.Specs.response400Spec;
-import static api.utils.DateTimeCheck.timeDifferenceCreateForServ;
 import static api.constans.Urls.URL_USERS;
 import static api.utils.RandomUtils.getRandomText;
 import static io.qameta.allure.Allure.step;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Создание юзера API POST /users")
 public class CreateUserTests extends TestBase {

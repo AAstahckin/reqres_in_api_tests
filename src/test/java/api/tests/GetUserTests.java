@@ -1,4 +1,4 @@
-package api;
+package api.tests;
 
 import api.models.getuser.UserResponseModel;
 import api.models.getusers.UsersResponseModel;

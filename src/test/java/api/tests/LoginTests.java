@@ -1,4 +1,4 @@
-package api;
+package api.tests;
 
 import api.models.LoginBodyModel;
 import api.models.LoginResponseModel;

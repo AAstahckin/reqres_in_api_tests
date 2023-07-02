@@ -1,4 +1,4 @@
-package api;
+package api.tests;
 
 import api.models.RegisterBodyModel;
 import api.models.RegisterResponseModel;
