@@ -38,13 +38,21 @@ dependencies {
             "io.rest-assured:json-schema-validator:${validatorRestAssuredVersion}",
             "com.github.javafaker:javafaker:${javaFakerVersion}",
             "org.slf4j:slf4j-simple:2.0.5",
+            'org.aeonbits.owner:owner:1.0.12',
             "io.qameta.allure:allure-rest-assured:${allureVersion}",
             "org.assertj:assertj-core:${assertjCoreVersion}"
     )
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF=8'
+}
+compileTestJava.options.encoding = 'UTF-8'
+compileJava.options.encoding = 'UTF-8'
+
 tasks.withType(Test) {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
 
     testLogging {
         lifecycle {

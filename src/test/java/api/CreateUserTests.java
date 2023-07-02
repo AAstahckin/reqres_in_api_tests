@@ -2,35 +2,70 @@ package api;
 
 import api.models.CreateUserResponseModel;
 import api.models.CreateUsersBodyModel;
+import api.models.LoginResponseModel;
 import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.stream.Stream;
+
+import static api.constans.ErrorsTexts.*;
+import static api.constans.Urls.URL_LOGIN;
 import static api.responseassertions.AssertionsResponseCreateUserApi.assertPositiveCreateUserApi;
+import static api.responseassertions.AssertionsResponseLoginApi.assertNegativeLoginApi;
 import static api.specs.Specs.response201Spec;
+import static api.specs.Specs.response400Spec;
 import static api.utils.DateTimeCheck.timeDifferenceCreateForServ;
 import static api.constans.Urls.URL_USERS;
+import static api.utils.RandomUtils.getRandomText;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Создание юзера API /users")
-public class CreateUserTests {
+@DisplayName("Создание юзера API POST /users")
+public class CreateUserTests extends TestBase {
 
     CreateUsersBodyModel userBody = new CreateUsersBodyModel();
-    Faker faker = new Faker();
+    static Faker faker = new Faker();
 
     @Test
     @DisplayName("Проверка создания пользователя")
-    @Description("Создание юзера")
+    @Description("Позитивный сценарий")
     public void positiveCreateUserTest() {
         userBody.setName(faker.name().firstName()).setJob(faker.job().position());
         val response = Requests.sendPostRequest(
                 URL_USERS.getUrl(), userBody, CreateUserResponseModel.class, response201Spec);
         assertPositiveCreateUserApi(response, userBody);
 
+    }
+
+    @DisplayName("Негативный сценарий создания пользователя")
+    @Description("Негативный сценарий")
+    @ParameterizedTest(name = "[user: {0}; pass:{1}]")
+    @MethodSource("submitIncorrectParameters")
+    public void negativeLoginTest(String name, String job) {
+        userBody.setName(name).setJob(job);
+        val response = Requests.sendPostRequest(
+                URL_USERS.getUrl(), userBody, CreateUserResponseModel.class, response201Spec);
+        assertPositiveCreateUserApi(response, userBody);
+    }
+
+    private static Stream<Arguments> submitIncorrectParameters() {
+        return Stream.of(
+                Arguments.of("!@%&^%*(!@(&*", "()*^*&%&*^@)"),
+                Arguments.of("КУАГУРУСУПЕР", "КУАГУРУСУПЕР"),
+                Arguments.of("qa.guru super", "qa.guru super"),
+                Arguments.of(" ", " "),
+                Arguments.of(getRandomText(100), getRandomText(100)),
+                Arguments.of(null, null),
+                Arguments.of(null, faker.job().position()),
+                Arguments.of(faker.job().position(), null),
+                Arguments.of("4124123", "41251253"));
     }
 
 }

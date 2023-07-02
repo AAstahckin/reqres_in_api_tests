@@ -17,25 +17,23 @@ import static api.responseassertions.AssertionsResponseLoginApi.*;
 import static api.specs.Specs.response200Spec;
 import static api.specs.Specs.response400Spec;
 import static api.constans.ErrorsTexts.*;
-import static data.TestLoginDataParams.LOGIN;
 import static api.constans.Urls.URL_LOGIN;
 
-@DisplayName("Авторизация API /login")
-public class LoginTests {
+@DisplayName("Авторизация API POST /login")
+public class LoginTests extends TestBase{
 
     LoginBodyModel loginBody = new LoginBodyModel();
-    Faker faker = new Faker();
 
     @Test
-    @DisplayName("Проверка авторизации пользователя API /login")
+    @DisplayName("Проверка авторизации пользователя")
     @Description("Авторизация")
     public void positiveLoginTest() {
-        loginBody.setEmail(LOGIN.getValue()).setPassword(faker.artist().name());
+        loginBody.setEmail(login).setPassword(password);
         val response = Requests.sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response200Spec);
         assertPositiveLoginApi(response);
     }
 
-    @DisplayName("Проверка негативных сценариев с 400 кодом API /login")
+    @DisplayName("Негативный сценарий авторизации ")
     @Description("Проверка негативных сценариев с 400")
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
@@ -46,11 +44,11 @@ public class LoginTests {
     }
 
     private static Stream<Arguments> submitIncorrectParameters() {
-        Faker fakerValue = new Faker();
+        Faker faker = new Faker();
         return Stream.of(
-                Arguments.of(fakerValue.internet().emailAddress(), fakerValue.artist().name(), USER_NOT_FOUND.getValue()),
-                Arguments.of(fakerValue.internet().emailAddress(), "", MISSING_PASSWORD.getValue()),
-                Arguments.of("", fakerValue.artist().name(), MISSING_EMAIL_OR_USERNAME.getValue()));
+                Arguments.of(faker.internet().emailAddress(), faker.artist().name(), USER_NOT_FOUND.getValue()),
+                Arguments.of(faker.internet().emailAddress(), "", MISSING_PASSWORD.getValue()),
+                Arguments.of("", faker.artist().name(), MISSING_EMAIL_OR_USERNAME.getValue()));
     }
 
 }

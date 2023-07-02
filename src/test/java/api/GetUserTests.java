@@ -17,12 +17,12 @@ import static api.specs.Specs.response200Spec;
 import static api.specs.Specs.response404Spec;
 import static api.utils.RandomUtils.getRandomUserForId;
 
-@DisplayName("Получение пользователя API users/")
-public class GetUserTests {
+@DisplayName("Получение пользователя API GET users/")
+public class GetUserTests extends TestBase {
 
     @Test
-    @DisplayName("Позитивный сценарий API users/")
-    @Description("Получение случайного пользователя")
+    @DisplayName("Получить рандомного пользователя по id")
+    @Description("Позитивный сценарий")
     public void positiveTestGetUser() {
         UsersDataValues randomUserId = getRandomUserForId();
         val response = Requests.sendGetRequestGetUser(
@@ -31,9 +31,9 @@ public class GetUserTests {
 
     }
 
-    @DisplayName("Негативные сценарии API users/")
-    @Description("Проверка негативных сценариев")
-    @ParameterizedTest(name = "Проверка выполнения запроса с queryParam {0}]")
+    @DisplayName("Запрос с queryParam")
+    @Description("Негативный сценарий")
+    @ParameterizedTest(name = "[{0}]")
     @ValueSource(strings = {"100", "0", "test", "%"})
     public void negativeTestGetUser(String value) {
         Requests.sendGetRequestGetUser(URL_USER.getUrl() + value, UsersResponseModel.class, response404Spec);

@@ -39,9 +39,9 @@ public class AssertionsResponseGetUsersApi {
                 assertEquals(response.getDataUserResponseModel().getLastName(), randomUserId.getLastName()));
         step("Проверяем что avatar соответствует ", () ->
                 assertEquals(response.getDataUserResponseModel().getAvatar(), randomUserId.getAvatar()));
-        step("Проверяем что avatar соответствует ", () ->
+        step("Проверяем что url соответствует ", () ->
                 assertEquals(response.getUserSupportResponseModel().getUrl(), URL_SUPPORT.getValue()));
-        step("Проверяем что avatar соответствует ", () ->
+        step("Проверяем что text соответствует ", () ->
                 assertEquals(response.getUserSupportResponseModel().getText(), TEXT_SUPPORT.getValue()));
     }
 

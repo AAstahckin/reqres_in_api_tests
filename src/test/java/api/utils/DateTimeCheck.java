@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static api.constans.TimeFormatConstants.DD_MM_YYYY_HH_MM;
+import static io.qameta.allure.Allure.step;
 
 public class DateTimeCheck {
 
@@ -36,8 +37,8 @@ public class DateTimeCheck {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR_OF_DAY, -3);
         String dateLocal = new SimpleDateFormat(DD_MM_YYYY_HH_MM.getValue()).format(calendar.getTime());
-        Allure.step("Проверка разница во времени: " + dateCreate+ " : " + dateLocal);
-        differenceTime(dateCreate, dateLocal, DD_MM_YYYY_HH_MM.getValue());
+        step("Проверяем дату", () -> differenceTime(dateCreate, dateLocal, DD_MM_YYYY_HH_MM.getValue()));
+
     }
 
 }

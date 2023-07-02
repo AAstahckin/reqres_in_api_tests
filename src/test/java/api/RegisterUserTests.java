@@ -17,26 +17,25 @@ import static api.responseassertions.AssertionsResponseRegisterApi.*;
 import static api.specs.Specs.response200Spec;
 import static api.specs.Specs.response400Spec;
 import static api.constans.ErrorsTexts.*;
-import static data.TestLoginDataParams.LOGIN;
 import static api.constans.Urls.URL_REGISTER;
 
-@DisplayName("Регистрация API /register")
-public class RegisterTests {
+@DisplayName("Регистрация пользователя API POST /register")
+public class RegisterUserTests extends TestBase {
+
     RegisterBodyModel bodyModel = new RegisterBodyModel();
-    Faker faker = new Faker();
 
     @Test
-    @DisplayName("Проверка регистрации пользователя API /register")
-    @Description("Регистрация")
+    @DisplayName("Регистрация пользователя")
+    @Description("Позитивный сценарий")
     public void positiveRegisterTest() {
-        bodyModel.setEmail(LOGIN.getValue()).setPassword(faker.artist().name());
+        bodyModel.setEmail(login).setPassword(password);
         val response = Requests.sendPostRequest(
                 URL_REGISTER.getUrl(), bodyModel, RegisterResponseModel.class, response200Spec);
         assertPositiveRegisterApi(response);
     }
 
-    @DisplayName("Проверка негативных сценариев с 400 кодом API /register")
-    @Description("Проверка негативных сценариев с 400")
+    @DisplayName("Регистрация пользователя с параметрами : ")
+    @Description("Негативный сценарий")
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
     public void negativeRegisterTest(String user, String pass, String responseErrorText) {
@@ -49,7 +48,7 @@ public class RegisterTests {
     private static Stream<Arguments> submitIncorrectParameters() {
         Faker fakerValue = new Faker();
         return Stream.of(
-                Arguments.of(LOGIN.getValue(), "", MISSING_PASSWORD.getValue()),
+                Arguments.of(login, "", MISSING_PASSWORD.getValue()),
                 Arguments.of("", fakerValue.artist().name(), MISSING_EMAIL_OR_USERNAME.getValue()),
                 Arguments.of(fakerValue.internet().emailAddress(), fakerValue.artist().name(), ONLY_DEFINED.getValue()));
     }

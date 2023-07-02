@@ -1,9 +1,10 @@
 package api;
-
 import api.models.getusers.UsersResponseModel;
 import api.service.Requests;
+import com.github.javafaker.Country;
 import data.UsersDataValues;
 import io.qameta.allure.Description;
+import io.restassured.RestAssured;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,14 +19,13 @@ import static api.responseassertions.AssertionsResponseGetUsersApi.*;
 import static api.specs.Specs.response200Spec;
 import static api.utils.RandomUtils.getRandomUserForId;
 import static api.constans.Urls.URL_USERS;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("Список пользователей API /users?per_page= и /users?page=")
-public class GetUsersTests {
+@DisplayName("Список пользователей API GET /users?per_page= и /users?page=")
+public class GetUsersTests extends TestBase {
 
-    @DisplayName("Список пользователей API /users?per_page=")
-    @Description("Список пользователей")
-    @ParameterizedTest(name = "Проверка возвращения элементов по атрибуту per_page")
+    @DisplayName("Список пользователей")
+    @Description("Позитивный сценарий")
+    @ParameterizedTest(name = " /users?per_page")
     @EnumSource(value = UsersDataValues.class)
     public void testsGetUsers(UsersDataValues usersDataValues) {
         val response = Requests.sendGetRequest(
@@ -33,9 +33,9 @@ public class GetUsersTests {
         assertGetElementPerPage(response, usersDataValues);
     }
 
-    @DisplayName("Список пользователей API /users?page=")
-    @Description("Список пользователей")
-    @ParameterizedTest(name = "Проверка возвращения элементов по атрибуту page")
+    @DisplayName("Список пользователей")
+    @Description("Позитивный сценарий")
+    @ParameterizedTest(name = " /users?page=")
     @MethodSource("checkOutputParamsForPage")
     public void testsGetUsers1(int page, int count) {
         val response = Requests.sendGetRequest(
@@ -50,22 +50,12 @@ public class GetUsersTests {
     }
 
     @Test
-    @DisplayName("Проверка возвращаемого пользователя")
-    @Description("Проверка пользователя")
+    @DisplayName("Проверка рандомного пользователя из списка")
+    @Description("Проверка рандомного пользователя")
     void randomUserTests() {
         UsersDataValues randomUserId = getRandomUserForId();
         val response = Requests.sendGetRequest(
                 URL_USERS.getUrl(), "per_page", UsersDataValues.values().length, UsersResponseModel.class, response200Spec);
-        assertGetRandomUser(response, randomUserId);
-    }
-
-    @Test
-    @DisplayName("Проверка возвращаемого пользователя API users/{int}")
-    @Description("Проверка пользователя")
-    void randomUserTests1() {
-        UsersDataValues randomUserId = getRandomUserForId();
-        val response = Requests.sendGetRequest(
-                URL_USERS.getUrl(), "/", UsersDataValues.values().length, UsersResponseModel.class, response200Spec);
         assertGetRandomUser(response, randomUserId);
     }
 

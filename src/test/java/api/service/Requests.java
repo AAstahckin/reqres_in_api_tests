@@ -1,9 +1,11 @@
 package api.service;
 
 import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.ResponseSpecification;
 
 import static api.specs.Specs.requestSpec;
+import static api.specs.Specs.response204Spec;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
@@ -35,6 +37,11 @@ public class Requests {
                 .body(body)
                 .when().put(endpoint).then().spec(responseSpecification).extract().response());
         return response.as(responseClass);
+    }
+
+    public static ValidatableResponse sendDeleteUserRequest(String endpoint, String userId) {
+        return step("Выполняется вызов метода DELETE, на " + endpoint + userId, () -> given(requestSpec)
+                .when().delete(endpoint + userId).then().spec(response204Spec));
     }
 
 }

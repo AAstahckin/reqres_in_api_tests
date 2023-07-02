@@ -16,5 +16,4 @@ public enum Urls {
         this.url = url;
     }
 
-
 }

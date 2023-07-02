@@ -13,15 +13,12 @@ public class CreateUsersBodyModel {
     private String job;
 
     public CreateUsersBodyModel setName(String name) {
-        CreateUsersBodyModel.this.name = name;
+        this.name = name;
         return this;
     }
 
     public CreateUsersBodyModel setJob(String job) {
-        CreateUsersBodyModel.this.job = job;
+        this.job = job;
         return this;
     }
-
-
-
 }
