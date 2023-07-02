@@ -1,10 +1,8 @@
-package api;
+package api.tests;
 import api.models.getusers.UsersResponseModel;
 import api.service.Requests;
-import com.github.javafaker.Country;
 import data.UsersDataValues;
 import io.qameta.allure.Description;
-import io.restassured.RestAssured;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
