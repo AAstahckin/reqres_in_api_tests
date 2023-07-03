@@ -5,7 +5,7 @@ import api.models.LoginResponseModel;
 import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
-import io.qameta.allure.Story;
+import io.qameta.allure.Feature;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import static api.specs.Specs.response400Spec;
 import static api.constans.ErrorsTexts.*;
 import static api.constans.Urls.URL_LOGIN;
 
-@Story("Авторизация")
+@Feature("Авторизация")
 @DisplayName("Авторизация API POST /login")
 public class LoginTests extends TestBase{
 

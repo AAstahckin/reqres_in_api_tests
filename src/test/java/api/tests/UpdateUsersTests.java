@@ -4,7 +4,7 @@ import api.models.*;
 import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
-import io.qameta.allure.Story;
+import io.qameta.allure.Feature;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import static api.responseassertions.AssertionsResponseUpdateUsers.assertUpdateU
 import static api.specs.Specs.response200Spec;
 import static api.utils.RandomUtils.getRandomText;
 
-@Story("Изменение пользователя")
+@Feature("Изменение пользователя")
 @DisplayName("Изменение пользователя API PUT /users/")
 public class UpdateUsersTests extends TestBase {
     static CreateUsersBodyModel bodyModel = new CreateUsersBodyModel();
