@@ -1,4 +1,5 @@
 # Проект по автоматизации тестирования API на [Reqres](https://reqres.in/)
+![WB_logo.jpg](media/logo/reqres_logo.png)
 ## :pushpin: Содержание:
 
 - [Используемый стек](#computer-используемый-стек)
