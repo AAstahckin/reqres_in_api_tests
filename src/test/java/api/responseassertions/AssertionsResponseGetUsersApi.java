@@ -2,7 +2,7 @@ package api.responseassertions;
 
 import api.models.getuser.UserResponseModel;
 import api.models.getusers.UsersResponseModel;
-import data.UsersDataValues;
+import api.data.UsersDataValues;
 import io.qameta.allure.Allure;
 
 import static api.constans.OtherTexts.TEXT_SUPPORT;

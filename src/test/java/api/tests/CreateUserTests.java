@@ -5,6 +5,7 @@ import api.models.CreateUsersBodyModel;
 import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ import static api.constans.Urls.URL_USERS;
 import static api.utils.RandomUtils.getRandomText;
 import static io.qameta.allure.Allure.step;
 
+@Story("Создание юзера")
 @DisplayName("Создание юзера API POST /users")
 public class CreateUserTests extends TestBase {
 

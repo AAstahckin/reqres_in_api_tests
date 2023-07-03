@@ -3,8 +3,9 @@ package api.tests;
 import api.models.getuser.UserResponseModel;
 import api.models.getusers.UsersResponseModel;
 import api.service.Requests;
-import data.UsersDataValues;
+import api.data.UsersDataValues;
 import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ import static api.specs.Specs.response200Spec;
 import static api.specs.Specs.response404Spec;
 import static api.utils.RandomUtils.getRandomUserForId;
 
+@Story("Получение пользователя")
 @DisplayName("Получение пользователя API GET users/")
 public class GetUserTests extends TestBase {
 

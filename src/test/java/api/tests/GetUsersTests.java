@@ -1,8 +1,9 @@
 package api.tests;
 import api.models.getusers.UsersResponseModel;
 import api.service.Requests;
-import data.UsersDataValues;
+import api.data.UsersDataValues;
 import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ import static api.specs.Specs.response200Spec;
 import static api.utils.RandomUtils.getRandomUserForId;
 import static api.constans.Urls.URL_USERS;
 
+@Story("Список пользователей")
 @DisplayName("Список пользователей API GET /users?per_page= и /users?page=")
 public class GetUsersTests extends TestBase {
 

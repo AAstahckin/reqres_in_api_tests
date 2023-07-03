@@ -1,7 +1,7 @@
 package api.utils;
 
 import com.github.javafaker.Faker;
-import data.UsersDataValues;
+import api.data.UsersDataValues;
 
 public class RandomUtils {
 
