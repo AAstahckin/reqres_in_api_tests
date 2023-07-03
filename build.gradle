@@ -15,6 +15,7 @@ def allureVersion = "2.22.1",
         validatorRestAssuredVersion = "5.3.0",
         javaFakerVersion = "1.0.2",
         jupiterVersion = "5.9.2",
+        ownerVersion = "1.0.12",
         assertjCoreVersion = "3.24.2"
 
         allure {
@@ -38,7 +39,7 @@ dependencies {
             "io.rest-assured:json-schema-validator:${validatorRestAssuredVersion}",
             "com.github.javafaker:javafaker:${javaFakerVersion}",
             "org.slf4j:slf4j-simple:2.0.5",
-            'org.aeonbits.owner:owner:1.0.12',
+            "org.aeonbits.owner:owner:${ownerVersion}",
             "io.qameta.allure:allure-rest-assured:${allureVersion}",
             "org.assertj:assertj-core:${assertjCoreVersion}"
     )
@@ -47,8 +48,15 @@ dependencies {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF=8'
 }
+
 compileTestJava.options.encoding = 'UTF-8'
 compileJava.options.encoding = 'UTF-8'
+
+task smoke_test(type: Test) {
+    useJUnitPlatform{
+        includeTags("sanity")
+    }
+}
 
 tasks.withType(Test) {
     useJUnitPlatform()

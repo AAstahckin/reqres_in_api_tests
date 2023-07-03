@@ -8,6 +8,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -23,6 +24,7 @@ import static api.utils.RandomUtils.getRandomUserForId;
 public class GetUserTests extends TestBase {
 
     @Test
+    @Tag("sanity")
     @DisplayName("Получить рандомного пользователя по id")
     @Description("Позитивный сценарий")
     public void positiveTestGetUser() {

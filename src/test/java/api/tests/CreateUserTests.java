@@ -8,6 +8,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -30,6 +31,7 @@ public class CreateUserTests extends TestBase {
     @Test
     @DisplayName("Проверка создания пользователя")
     @Description("Позитивный сценарий")
+    @Tag("sanity")
     public void positiveCreateUserTest() {
         userBody.setName(faker.name().firstName()).setJob(faker.job().position());
         val response = Requests.sendPostRequest(

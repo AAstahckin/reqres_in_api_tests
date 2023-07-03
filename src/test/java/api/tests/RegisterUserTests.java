@@ -8,6 +8,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -27,6 +28,7 @@ public class RegisterUserTests extends TestBase {
     RegisterBodyModel bodyModel = new RegisterBodyModel();
 
     @Test
+    @Tag("sanity")
     @DisplayName("Регистрация пользователя")
     @Description("Позитивный сценарий")
     public void positiveRegisterTest() {

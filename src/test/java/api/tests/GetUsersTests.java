@@ -6,6 +6,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -23,6 +24,7 @@ import static api.constans.Urls.URL_USERS;
 @DisplayName("Список пользователей API GET /users?per_page= и /users?page=")
 public class GetUsersTests extends TestBase {
 
+    @Tag("sanity")
     @DisplayName("Список пользователей")
     @Description("Позитивный сценарий")
     @ParameterizedTest(name = " /users?per_page")
