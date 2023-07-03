@@ -52,12 +52,6 @@ tasks.withType(JavaCompile) {
 compileTestJava.options.encoding = 'UTF-8'
 compileJava.options.encoding = 'UTF-8'
 
-task smoke_test(type: Test) {
-    useJUnitPlatform{
-        includeTags("sanity")
-    }
-}
-
 tasks.withType(Test) {
     useJUnitPlatform()
     systemProperties(System.getProperties())
@@ -67,5 +61,11 @@ tasks.withType(Test) {
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
+    }
+}
+
+task sanity(type: Test) {
+    useJUnitPlatform{
+        includeTags("sanity")
     }
 }
