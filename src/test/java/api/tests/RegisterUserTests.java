@@ -5,8 +5,10 @@ import api.models.RegisterResponseModel;
 import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -19,12 +21,14 @@ import static api.specs.Specs.response400Spec;
 import static api.constans.ErrorsTexts.*;
 import static api.constans.Urls.URL_REGISTER;
 
+@Story("Регистрация пользователя")
 @DisplayName("Регистрация пользователя API POST /register")
 public class RegisterUserTests extends TestBase {
 
     RegisterBodyModel bodyModel = new RegisterBodyModel();
 
     @Test
+    @Tag("sanity")
     @DisplayName("Регистрация пользователя")
     @Description("Позитивный сценарий")
     public void positiveRegisterTest() {
