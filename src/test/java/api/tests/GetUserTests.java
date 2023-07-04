@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static api.constans.Urls.URL_USER;
 import static api.responseassertions.AssertionsResponseGetUsersApi.assertGetUser;
+import static api.service.Requests.sendGetRequestGetUser;
 import static api.specs.Specs.response200Spec;
 import static api.specs.Specs.response404Spec;
 import static api.utils.RandomUtils.getRandomUserForId;
@@ -29,7 +30,7 @@ public class GetUserTests extends TestBase {
     @Description("Позитивный сценарий")
     public void positiveTestGetUser() {
         UsersDataValues randomUserId = getRandomUserForId();
-        val response = Requests.sendGetRequestGetUser(
+        val response = sendGetRequestGetUser(
                 URL_USER.getUrl() + randomUserId.getId(), UserResponseModel.class, response200Spec);
         assertGetUser(response, randomUserId);
 
@@ -40,7 +41,7 @@ public class GetUserTests extends TestBase {
     @ParameterizedTest(name = "[{0}]")
     @ValueSource(strings = {"100", "0", "test", "%"})
     public void negativeTestGetUser(String value) {
-        Requests.sendGetRequestGetUser(URL_USER.getUrl() + value, UsersResponseModel.class, response404Spec);
+        sendGetRequestGetUser(URL_USER.getUrl() + value, UsersResponseModel.class, response404Spec);
     }
 
 }

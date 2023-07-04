@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 import static api.constans.Urls.URL_USER;
 import static api.responseassertions.AssertionsResponseUpdateUsers.assertUpdateUserTestApi;
+import static api.service.Requests.sendPutRequest;
 import static api.specs.Specs.response200Spec;
 import static api.utils.RandomUtils.getRandomText;
 
@@ -30,7 +31,7 @@ public class UpdateUsersTests extends TestBase {
     @Description("ПозитивнВ сценарий")
     public void positiveUpdateUserTest() {
         bodyModel.setName(faker.name().firstName()).setJob(faker.artist().name());
-        val response = Requests.sendPutRequest(
+        val response = sendPutRequest(
                 URL_USER.getUrl() + faker.random().nextInt(1,100), bodyModel, UpdateUserResponseModel.class, response200Spec);
         assertUpdateUserTestApi(response, bodyModel);
 
@@ -43,7 +44,7 @@ public class UpdateUsersTests extends TestBase {
     @MethodSource("checkOutputParamsForPage")
     public void negativeUpdateUserTests(String valueName,String valueJob) {
         bodyModel.setName(valueName).setJob(valueJob);
-        val response = Requests.sendPutRequest(
+        val response = sendPutRequest(
                 URL_USER.getUrl() + faker.random().nextInt(1,100), bodyModel, UpdateUserResponseModel.class, response200Spec);
         assertUpdateUserTestApi(response, bodyModel);
     }

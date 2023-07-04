@@ -16,6 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static api.responseassertions.AssertionsResponseGetUsersApi.*;
+import static api.service.Requests.sendGetRequest;
 import static api.specs.Specs.response200Spec;
 import static api.utils.RandomUtils.getRandomUserForId;
 import static api.constans.Urls.URL_USERS;
@@ -29,8 +30,8 @@ public class GetUsersTests extends TestBase {
     @Description("Позитивный сценарий")
     @ParameterizedTest(name = " /users?per_page")
     @EnumSource(value = UsersDataValues.class)
-    public void testsGetUsers(UsersDataValues usersDataValues) {
-        val response = Requests.sendGetRequest(
+    public void testsGetUsersPerPage(UsersDataValues usersDataValues) {
+        val response = sendGetRequest(
                 URL_USERS.getUrl(), "per_page", usersDataValues.getId(), UsersResponseModel.class, response200Spec);
         assertGetElementPerPage(response, usersDataValues);
     }
@@ -39,8 +40,8 @@ public class GetUsersTests extends TestBase {
     @Description("Позитивный сценарий")
     @ParameterizedTest(name = " /users?page=")
     @MethodSource("checkOutputParamsForPage")
-    public void testsGetUsers1(int page, int count) {
-        val response = Requests.sendGetRequest(
+    public void testsGetUsersPage(int page, int count) {
+        val response = sendGetRequest(
                 URL_USERS.getUrl(), "page", page, UsersResponseModel.class, response200Spec);
         assertGetElementPage(response, page, count);
     }
@@ -56,7 +57,7 @@ public class GetUsersTests extends TestBase {
     @Description("Проверка рандомного пользователя")
     void randomUserTests() {
         UsersDataValues randomUserId = getRandomUserForId();
-        val response = Requests.sendGetRequest(
+        val response = sendGetRequest(
                 URL_USERS.getUrl(), "per_page", UsersDataValues.values().length, UsersResponseModel.class, response200Spec);
         assertGetRandomUser(response, randomUserId);
     }

@@ -16,6 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static api.responseassertions.AssertionsResponseRegisterApi.*;
+import static api.service.Requests.sendPostRequest;
 import static api.specs.Specs.response200Spec;
 import static api.specs.Specs.response400Spec;
 import static api.constans.ErrorsTexts.*;
@@ -33,7 +34,7 @@ public class RegisterUserTests extends TestBase {
     @Description("Позитивный сценарий")
     public void positiveRegisterTest() {
         bodyModel.setEmail(login).setPassword(password);
-        val response = Requests.sendPostRequest(
+        val response = sendPostRequest(
                 URL_REGISTER.getUrl(), bodyModel, RegisterResponseModel.class, response200Spec);
         assertPositiveRegisterApi(response);
     }
@@ -44,7 +45,7 @@ public class RegisterUserTests extends TestBase {
     @MethodSource("submitIncorrectParameters")
     public void negativeRegisterTest(String user, String pass, String responseErrorText) {
         bodyModel.setEmail(user).setPassword(pass);
-        val response = Requests.sendPostRequest(
+        val response = sendPostRequest(
                 URL_REGISTER.getUrl(), bodyModel, RegisterResponseModel.class, response400Spec);
         assertNegativeRegisterApi(response, responseErrorText);
     }

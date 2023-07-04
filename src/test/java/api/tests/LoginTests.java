@@ -16,6 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static api.responseassertions.AssertionsResponseLoginApi.*;
+import static api.service.Requests.sendPostRequest;
 import static api.specs.Specs.response200Spec;
 import static api.specs.Specs.response400Spec;
 import static api.constans.ErrorsTexts.*;
@@ -33,7 +34,7 @@ public class LoginTests extends TestBase{
     @Description("Авторизация")
     public void positiveLoginTest() {
         loginBody.setEmail(login).setPassword(password);
-        val response = Requests.sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response200Spec);
+        val response = sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response200Spec);
         assertPositiveLoginApi(response);
     }
 
@@ -43,7 +44,7 @@ public class LoginTests extends TestBase{
     @MethodSource("submitIncorrectParameters")
     public void negativeLoginTest(String user, String pass, String responseErrorText) {
         loginBody.setEmail(user).setPassword(pass);
-        val response = Requests.sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response400Spec);
+        val response = sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response400Spec);
         assertNegativeLoginApi(response, responseErrorText);
     }
 

@@ -17,6 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static api.responseassertions.AssertionsResponseCreateUserApi.assertPositiveCreateUserApi;
+import static api.service.Requests.sendPostRequest;
 import static api.specs.Specs.response201Spec;
 import static api.constans.Urls.URL_USERS;
 import static api.utils.RandomUtils.getRandomText;
@@ -34,7 +35,7 @@ public class CreateUserTests extends TestBase {
     @Tag("sanity")
     public void positiveCreateUserTest() {
         userBody.setName(faker.name().firstName()).setJob(faker.job().position());
-        val response = Requests.sendPostRequest(
+        val response = sendPostRequest(
                 URL_USERS.getUrl(), userBody, CreateUserResponseModel.class, response201Spec);
         assertPositiveCreateUserApi(response, userBody);
 
@@ -46,7 +47,7 @@ public class CreateUserTests extends TestBase {
     @MethodSource("submitIncorrectParameters")
     public void negativeLoginTest(String name, String job) {
         userBody.setName(name).setJob(job);
-        val response = Requests.sendPostRequest(
+        val response = sendPostRequest(
                 URL_USERS.getUrl(), userBody, CreateUserResponseModel.class, response201Spec);
         assertPositiveCreateUserApi(response, userBody);
     }
