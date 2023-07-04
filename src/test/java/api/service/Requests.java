@@ -5,7 +5,6 @@ import io.restassured.specification.ResponseSpecification;
 import lombok.val;
 
 import static api.specs.Specs.requestSpec;
-import static api.specs.Specs.response204Spec;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
