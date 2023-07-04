@@ -1,8 +1,6 @@
 package api.tests;
 
 import api.models.LoginBodyModel;
-import api.models.LoginResponseModel;
-import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
@@ -16,11 +14,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static api.responseassertions.AssertionsResponseLoginApi.*;
-import static api.service.Requests.sendPostRequest;
-import static api.specs.Specs.response200Spec;
-import static api.specs.Specs.response400Spec;
+import static api.service.RequestLoginUser.sendLogin;
+import static api.service.RequestLoginUser.sendLoginRaw;
 import static api.constans.ErrorsTexts.*;
-import static api.constans.Urls.URL_LOGIN;
 
 @Story("Авторизация")
 @DisplayName("Авторизация API POST /login")
@@ -34,7 +30,7 @@ public class LoginTests extends TestBase{
     @Description("Авторизация")
     public void positiveLoginTest() {
         loginBody.setEmail(login).setPassword(password);
-        val response = sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response200Spec);
+        val response = sendLogin(loginBody);
         assertPositiveLoginApi(response);
     }
 
@@ -44,7 +40,7 @@ public class LoginTests extends TestBase{
     @MethodSource("submitIncorrectParameters")
     public void negativeLoginTest(String user, String pass, String responseErrorText) {
         loginBody.setEmail(user).setPassword(pass);
-        val response = sendPostRequest(URL_LOGIN.getUrl(), loginBody, LoginResponseModel.class, response400Spec);
+        val response = sendLoginRaw(loginBody);
         assertNegativeLoginApi(response, responseErrorText);
     }
 

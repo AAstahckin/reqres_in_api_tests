@@ -1,0 +1,39 @@
+package api.service;
+
+import api.models.RegisterResponseModel;
+import io.restassured.response.Response;
+import static api.constans.Urls.*;
+import static api.specs.Specs.requestSpec;
+import static api.specs.Specs.response200Spec;
+import static io.qameta.allure.Allure.step;
+import static io.restassured.RestAssured.given;
+
+public class RequestRegisterUser {
+
+    public static String stepSendPostRequest(String value) {
+        return String.format("Выполняется вызов метода POST, на %s", value);
+    }
+
+    public static RegisterResponseModel sendRegisterUser(Object body) {
+        return step(stepSendPostRequest(URL_REGISTER.getUrl()), () ->
+                given(requestSpec)
+                        .when()
+                        .body(body)
+                        .post(URL_REGISTER.getUrl())
+                        .then()
+                        .spec(response200Spec)
+                        .extract()
+                        .response()
+                        .as(RegisterResponseModel.class));
+    }
+
+    public static Response sendRegisterUserRaw(Object body) {
+        return step(stepSendPostRequest(URL_REGISTER.getUrl()), () ->
+                given(requestSpec)
+                        .when()
+                        .body(body)
+                        .post(URL_REGISTER.getUrl())
+                        .then().extract().response());
+    }
+
+}

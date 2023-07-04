@@ -17,7 +17,7 @@
 <img width="6%" title="Allure Report" src="media/logo/Allure.svg">
 <img width="5%" title="Allure TestOps" src="media/logo/Allure_TO.svg">
 <img width="6%" title="Gradle" src="media/logo/Gradle.svg">
-<img width="6%" title="JUnit5" src="media/logo/JUnit5.svg">
+<img width="6%" title="JUnit5" src="media/logo/Junit5.svg">
 <img width="6%" title="RestAssured" src="media/logo/RestAssured.svg">
 <img width="6%" title="GitHub" src="media/logo/GitHub.svg">
 <img width="6%" title="Jenkins" src="media/logo/Jenkins.svg">

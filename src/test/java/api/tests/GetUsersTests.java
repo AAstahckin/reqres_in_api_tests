@@ -1,6 +1,4 @@
 package api.tests;
-import api.models.getusers.UsersResponseModel;
-import api.service.Requests;
 import api.data.UsersDataValues;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
@@ -12,37 +10,37 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static api.responseassertions.AssertionsResponseGetUsersApi.*;
-import static api.service.Requests.sendGetRequest;
-import static api.specs.Specs.response200Spec;
+import static api.service.RequestGetUsers.sendGetUsers;
 import static api.utils.RandomUtils.getRandomUserForId;
-import static api.constans.Urls.URL_USERS;
 
 @Story("Список пользователей")
 @DisplayName("Список пользователей API GET /users?per_page= и /users?page=")
 public class GetUsersTests extends TestBase {
 
-    @Tag("sanity")
+    Map<String, Integer> queryParam = new HashMap<>();
+
     @DisplayName("Список пользователей")
     @Description("Позитивный сценарий")
     @ParameterizedTest(name = " /users?per_page")
     @EnumSource(value = UsersDataValues.class)
     public void testsGetUsersPerPage(UsersDataValues usersDataValues) {
-        val response = sendGetRequest(
-                URL_USERS.getUrl(), "per_page", usersDataValues.getId(), UsersResponseModel.class, response200Spec);
+        queryParam.put("per_page", usersDataValues.getId());
+        val response = sendGetUsers(queryParam);
         assertGetElementPerPage(response, usersDataValues);
     }
 
     @DisplayName("Список пользователей")
     @Description("Позитивный сценарий")
-    @ParameterizedTest(name = " /users?page=")
+    @ParameterizedTest(name = " /users?page={0}")
     @MethodSource("checkOutputParamsForPage")
     public void testsGetUsersPage(int page, int count) {
-        val response = sendGetRequest(
-                URL_USERS.getUrl(), "page", page, UsersResponseModel.class, response200Spec);
+        queryParam.put("page", page);
+        val response = sendGetUsers(queryParam);
         assertGetElementPage(response, page, count);
     }
 
@@ -55,10 +53,11 @@ public class GetUsersTests extends TestBase {
     @Test
     @DisplayName("Проверка рандомного пользователя из списка")
     @Description("Проверка рандомного пользователя")
+    @Tag("sanity")
     void randomUserTests() {
-        UsersDataValues randomUserId = getRandomUserForId();
-        val response = sendGetRequest(
-                URL_USERS.getUrl(), "per_page", UsersDataValues.values().length, UsersResponseModel.class, response200Spec);
+        val randomUserId = getRandomUserForId();
+        queryParam.put("per_page", UsersDataValues.values().length);
+        val response = sendGetUsers(queryParam);;
         assertGetRandomUser(response, randomUserId);
     }
 
