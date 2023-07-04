@@ -39,9 +39,9 @@ public class Requests {
         return response.as(responseClass);
     }
 
-    public static ValidatableResponse sendDeleteUserRequest(String endpoint, String userId) {
+    public static ValidatableResponse sendDeleteUserRequest(String endpoint, String userId, ResponseSpecification responseSpecification) {
         return step("Выполняется вызов метода DELETE, на " + endpoint + userId, () -> given(requestSpec)
-                .when().delete(endpoint + userId).then().spec(response204Spec));
+                .when().delete(endpoint + userId).then().spec(responseSpecification));
     }
 
 }
