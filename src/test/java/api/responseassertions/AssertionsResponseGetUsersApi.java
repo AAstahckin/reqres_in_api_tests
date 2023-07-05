@@ -3,62 +3,67 @@ package api.responseassertions;
 import api.models.getuser.UserResponseModel;
 import api.models.getusers.UsersResponseModel;
 import api.data.UsersDataValues;
+import io.restassured.response.Response;
 
+import java.util.concurrent.TimeUnit;
+
+import static api.constans.HttpStatus.OK;
 import static api.constans.OtherTexts.TEXT_SUPPORT;
 import static api.constans.OtherTexts.URL_SUPPORT;
-import static api.helpers.CustomsTextsSteps.stepMatchingParameter;
-import static api.helpers.CustomsTextsSteps.stepMatchingParameterId;
+import static api.helpers.CustomsTextsSteps.*;
 import static io.qameta.allure.Allure.step;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AssertionsResponseGetUsersApi {
 
     public static void assertGetRandomUser(UsersResponseModel response, UsersDataValues randomUserId) {
-        step(stepMatchingParameterId(response.getData().get(randomUserId.ordinal()).getId()), () ->
+        step(matchingParameterId(randomUserId.getId()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getId(), randomUserId.getId()));
-        step(stepMatchingParameter(response.getData().get(randomUserId.ordinal()).getEmail()), () ->
+        step(matchingParameter(randomUserId.getEmail()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getEmail(), randomUserId.getEmail()));
-        step(stepMatchingParameter(response.getData().get(randomUserId.ordinal()).getFirstName()), () ->
+        step(matchingParameter(randomUserId.getFirstName()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getFirstName(), randomUserId.getFirstName()));
-        step(stepMatchingParameter(response.getData().get(randomUserId.ordinal()).getLastName()), () ->
+        step(matchingParameter(randomUserId.getLastName()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getLastName(), randomUserId.getLastName()));
-        step(stepMatchingParameter(response.getData().get(randomUserId.ordinal()).getAvatar()), () ->
+        step(matchingParameter(randomUserId.getAvatar()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getAvatar(), randomUserId.getAvatar()));
 
     }
 
     public static void assertGetUser(UserResponseModel response, UsersDataValues randomUserId) {
-        step(stepMatchingParameterId(response.getDataUserResponseModel().getId()), () ->
+        step(matchingParameterId(randomUserId.getId()), () ->
                 assertEquals(response.getDataUserResponseModel().getId(), randomUserId.getId()));
-        step(stepMatchingParameter(response.getDataUserResponseModel().getEmail()), () ->
+        step(matchingParameter(randomUserId.getEmail()), () ->
                 assertEquals(response.getDataUserResponseModel().getEmail(), randomUserId.getEmail()));
-        step(stepMatchingParameter(response.getDataUserResponseModel().getFirstName()), () ->
+        step(matchingParameter(randomUserId.getFirstName()), () ->
                 assertEquals(response.getDataUserResponseModel().getFirstName(), randomUserId.getFirstName()));
-        step(stepMatchingParameter(response.getDataUserResponseModel().getLastName()), () ->
+        step(matchingParameter(randomUserId.getLastName()), () ->
                 assertEquals(response.getDataUserResponseModel().getLastName(), randomUserId.getLastName()));
-        step(stepMatchingParameter(response.getDataUserResponseModel().getAvatar()), () ->
+        step(matchingParameter(randomUserId.getAvatar()), () ->
                 assertEquals(response.getDataUserResponseModel().getAvatar(), randomUserId.getAvatar()));
-        step(stepMatchingParameter(response.getUserSupportResponseModel().getUrl()), () ->
+        step(support(URL_SUPPORT.getValue()), () ->
                 assertEquals(response.getUserSupportResponseModel().getUrl(), URL_SUPPORT.getValue()));
-        step(stepMatchingParameter(response.getUserSupportResponseModel().getText()), () ->
+        step(support(TEXT_SUPPORT.getValue()), () ->
                 assertEquals(response.getUserSupportResponseModel().getText(), TEXT_SUPPORT.getValue()));
     }
 
     public static void assertGetElementPage(UsersResponseModel response, int page, int count) {
-        step("Проверяем колличество возвращаемых элементов" + count, () ->
+        step(countElement(count), () ->
                 assertEquals(response.getData().size(), count));
-        step("Проверяем что меняется page при запросе ?page=" + page, () ->
+        step(countPage(page), () ->
                 assertEquals(response.getPage(), page));
     }
 
     public static void assertGetElementPerPage(UsersResponseModel response, UsersDataValues usersDataValues) {
-        step("Проверяем колличество возвращаемых элементов", () ->
+        step(countElement(usersDataValues.getId()), () ->
                 assertEquals(response.getData().size(), usersDataValues.getId()));
-        step("Проверяем что в ответе изменилось значение ключа per_page", () ->
+        step(countPerPage(usersDataValues.getId()), () ->
                 assertEquals(response.getPerPage(), usersDataValues.getId()));
-        step("Проверяем что объекте support присутствует url : ", () ->
+        step(support(URL_SUPPORT.getValue()), () ->
                 assertEquals(response.getSupport().getUrl(), URL_SUPPORT.getValue()));
-        step("Проверяем что объекте support присутствует text : ", () ->
+        step(support(TEXT_SUPPORT.getValue()), () ->
                 assertEquals(response.getSupport().getText(), TEXT_SUPPORT.getValue()));
     }
 

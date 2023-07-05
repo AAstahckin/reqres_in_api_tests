@@ -4,21 +4,22 @@ import api.models.RegisterResponseModel;
 import io.restassured.response.Response;
 
 import static api.constans.HttpStatus.BAD_REQUEST;
+import static api.helpers.CustomsTextsSteps.*;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class AssertionsResponseRegisterApi {
 
-    public static void assertPositiveRegisterApi(RegisterResponseModel response) {
-        step("Проверяем что id соответствует: ", () -> assertEquals(response.getId(), 4));
-        step("Проверяем что token присутствует  : ", () -> assertNotNull(response.getToken()));
+    public static void assertPositiveRegisterApi(RegisterResponseModel response, int id) {
+        step(matchingParameterId(id), () -> assertEquals(response.getId(), id));
+        step(presentParameter("token"), () -> assertNotNull(response.getToken()));
     }
 
     public static void assertNegativeRegisterApi(Response response, String responseErrorText) {
-        step("Проверяем код ответа", () ->
+        step(statusCodeResponse(BAD_REQUEST.getCode()), () ->
                 assertEquals(response.statusCode(), BAD_REQUEST.getCode()));
-        step("Проверяем что присутствует ошибка : " + responseErrorText, () ->
+        step(errorText(responseErrorText), () ->
                 assertEquals(response.as(RegisterResponseModel.class).getError(), responseErrorText));
     }
 

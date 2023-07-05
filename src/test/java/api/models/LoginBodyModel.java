@@ -11,12 +11,12 @@ public class LoginBodyModel {
     private String password;
 
     public LoginBodyModel setEmail(String email) {
-        LoginBodyModel.this.email = email;
+        this.email = email;
         return this;
     }
 
     public LoginBodyModel setPassword(String password) {
-        LoginBodyModel.this.password = password;
+        this.password = password;
         return this;
     }
 

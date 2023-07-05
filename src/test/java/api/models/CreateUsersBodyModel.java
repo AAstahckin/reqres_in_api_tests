@@ -1,9 +1,7 @@
 package api.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -21,4 +19,5 @@ public class CreateUsersBodyModel {
         this.job = job;
         return this;
     }
+
 }

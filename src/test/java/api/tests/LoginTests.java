@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
 
 import static api.responseassertions.AssertionsResponseLoginApi.*;
@@ -20,7 +21,7 @@ import static api.constans.ErrorsTexts.*;
 
 @Story("Авторизация")
 @DisplayName("Авторизация API POST /login")
-public class LoginTests extends TestBase{
+public class LoginTests extends TestBase {
 
     LoginBodyModel body = new LoginBodyModel();
 

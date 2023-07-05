@@ -6,17 +6,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UsersSupportResponseModel {
 
-	@JsonProperty("text")
-	private String text;
+    @JsonProperty("text")
+    private String text;
 
-	@JsonProperty("url")
-	private String url;
+    @JsonProperty("url")
+    private String url;
 
-	public String getText(){
-		return text;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public String getUrl(){
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
+
 }

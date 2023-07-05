@@ -11,26 +11,31 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
+
 import static api.responseassertions.AssertionsResponseRegisterApi.*;
 import static api.service.RequestRegisterUser.sendRegisterUser;
 import static api.service.RequestRegisterUser.sendRegisterUserRaw;
 import static api.constans.ErrorsTexts.*;
+import static api.utils.RandomUtils.getRandomUserForId;
 
 @Story("Регистрация пользователя")
 @DisplayName("Регистрация пользователя API POST /register")
 public class RegisterUserTests extends TestBase {
 
     RegisterBodyModel body = new RegisterBodyModel();
+    Faker faker = new Faker();
 
     @Test
     @Tag("sanity")
     @DisplayName("Регистрация пользователя")
     @Description("Позитивный сценарий")
     public void positiveRegisterTest() {
-        body.setEmail(login).setPassword(password);
+        val randomUserId = getRandomUserForId();
+        body.setEmail(randomUserId.getEmail()).setPassword(faker.internet().password());
         val response = sendRegisterUser(body);
-        assertPositiveRegisterApi(response);
+        assertPositiveRegisterApi(response, randomUserId.getId());
     }
 
     @DisplayName("Регистрация пользователя с параметрами : ")
