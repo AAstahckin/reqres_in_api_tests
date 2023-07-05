@@ -35,7 +35,7 @@ public class DateTimeCheck {
 
     public static void timeDifferenceCreateForServ(String dateCreate) {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, -3);
+        calendar.add(Calendar.HOUR_OF_DAY, Calendar.AM);
         String dateLocal = new SimpleDateFormat(DD_MM_YYYY_HH_MM.getValue()).format(calendar.getTime());
         step("Проверяем дату", () -> differenceTime(dateCreate, dateLocal, DD_MM_YYYY_HH_MM.getValue()));
 
