@@ -10,21 +10,22 @@ import lombok.Getter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UsersResponseModel {
 
-	@JsonProperty("per_page")
-	private int perPage;
+    @JsonProperty("per_page")
+    private int perPage;
 
-	@JsonProperty("total")
-	private int total;
+    @JsonProperty("total")
+    private int total;
 
-	@JsonProperty("data")
-	private List<DataUsersResponseModel> data;
+    @JsonProperty("data")
+    private List<DataUsersResponseModel> data;
 
-	@JsonProperty("page")
-	private int page;
+    @JsonProperty("page")
+    private int page;
 
-	@JsonProperty("total_pages")
-	private int totalPages;
+    @JsonProperty("total_pages")
+    private int totalPages;
 
-	@JsonProperty("support")
-	private UsersSupportResponseModel support;
+    @JsonProperty("support")
+    private UsersSupportResponseModel support;
+
 }

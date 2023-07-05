@@ -11,16 +11,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
+
 import static api.responseassertions.AssertionsResponseUpdateUsers.assertUpdateUserTestApi;
-import static api.service.RequestUpdateUser.sendUpdateUser;
+import static api.service.RequestUpdateUser.putUpdateUser;
 import static api.utils.RandomUtils.getRandomText;
 
 @Story("Изменение пользователя")
 @DisplayName("Изменение пользователя API PUT /users/id")
-public class UpdateUsersTests extends TestBase {
+public class PutUpdateUsersTests extends TestBase {
 
-    CreateUsersBodyModel bodyModel = new CreateUsersBodyModel();
+    CreateUsersBodyModel body = new CreateUsersBodyModel();
     static Faker faker = new Faker();
 
     @Test
@@ -28,21 +30,20 @@ public class UpdateUsersTests extends TestBase {
     @DisplayName("Изменение пользователя")
     @Description("ПозитивнВ сценарий")
     public void positiveUpdateUserTest() {
-        bodyModel.setName(faker.name().firstName()).setJob(faker.artist().name());
-        val response = sendUpdateUser(bodyModel, faker.random().nextInt(1,100));
-        assertUpdateUserTestApi(response, bodyModel);
+        body.setName(faker.name().firstName()).setJob(faker.artist().name());
+        val response = putUpdateUser(body, faker.random().nextInt(1, 100));
+        assertUpdateUserTestApi(response, body);
 
     }
-
 
     @DisplayName("Негативный сценарий изменения пользователя ")
     @Description("Негативный сценарии")
     @ParameterizedTest(name = "[Name = {0}, Job = {1}]")
     @MethodSource("checkOutputParamsForPage")
-    public void negativeUpdateUserTests(String valueName,String valueJob) {
-        bodyModel.setName(valueName).setJob(valueJob);
-        val response = sendUpdateUser(bodyModel, faker.random().nextInt(1,100));
-        assertUpdateUserTestApi(response, bodyModel);
+    public void negativeUpdateUserTests(String valueName, String valueJob) {
+        body.setName(valueName).setJob(valueJob);
+        val response = putUpdateUser(body, faker.random().nextInt(1, 100));
+        assertUpdateUserTestApi(response, body);
     }
 
     private static Stream<Arguments> checkOutputParamsForPage() {
@@ -57,4 +58,5 @@ public class UpdateUsersTests extends TestBase {
                 Arguments.of(faker.job().position(), null),
                 Arguments.of("4124123", "41251253"));
     }
+
 }

@@ -4,6 +4,7 @@ import api.tests.TestBase;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+
 import static api.helpers.CustomAllureListener.withCustomTemplates;
 import static api.constans.HttpStatus.*;
 import static io.restassured.RestAssured.*;

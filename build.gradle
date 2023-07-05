@@ -11,14 +11,14 @@ repositories {
 }
 
 def allureVersion = "2.22.1",
-        restAssuredVersion = "5.3.0",
-        validatorRestAssuredVersion = "5.3.0",
-        javaFakerVersion = "1.0.2",
-        jupiterVersion = "5.9.2",
-        ownerVersion = "1.0.12",
-        assertjCoreVersion = "3.24.2"
+    restAssuredVersion = "5.3.0",
+    validatorRestAssuredVersion = "5.3.0",
+    javaFakerVersion = "1.0.2",
+    jupiterVersion = "5.9.2",
+    ownerVersion = "1.0.12",
+    assertjCoreVersion = "3.24.2"
 
-        allure {
+allure {
     report {
         version.set("${allureVersion}")
     }
@@ -65,7 +65,7 @@ tasks.withType(Test) {
 }
 
 task sanity(type: Test) {
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags("sanity")
     }
 }

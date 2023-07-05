@@ -17,5 +17,4 @@ public class TestBase {
         RestAssured.basePath = config.getBasePath();
     }
 
-
 }

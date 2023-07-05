@@ -6,9 +6,10 @@ import lombok.Getter;
 @Getter
 public class UserSupportResponseModel {
 
-	@JsonProperty("text")
-	private String text;
+    @JsonProperty("text")
+    private String text;
 
-	@JsonProperty("url")
-	private String url;
+    @JsonProperty("url")
+    private String url;
+
 }

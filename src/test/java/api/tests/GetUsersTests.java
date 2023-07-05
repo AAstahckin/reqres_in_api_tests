@@ -1,5 +1,7 @@
 package api.tests;
+
 import api.data.UsersDataValues;
+import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import lombok.val;
@@ -10,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -23,6 +26,7 @@ import static api.utils.RandomUtils.getRandomUserForId;
 public class GetUsersTests extends TestBase {
 
     Map<String, Integer> queryParam = new HashMap<>();
+    Faker faker = new Faker();
 
     @DisplayName("Список пользователей")
     @Description("Позитивный сценарий")
@@ -57,7 +61,7 @@ public class GetUsersTests extends TestBase {
     void randomUserTests() {
         val randomUserId = getRandomUserForId();
         queryParam.put("per_page", UsersDataValues.values().length);
-        val response = sendGetUsers(queryParam);;
+        val response = sendGetUsers(queryParam);
         assertGetRandomUser(response, randomUserId);
     }
 

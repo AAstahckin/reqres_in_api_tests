@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
 
 import static api.responseassertions.AssertionsResponseLoginApi.*;
@@ -20,17 +21,17 @@ import static api.constans.ErrorsTexts.*;
 
 @Story("Авторизация")
 @DisplayName("Авторизация API POST /login")
-public class LoginTests extends TestBase{
+public class LoginTests extends TestBase {
 
-    LoginBodyModel loginBody = new LoginBodyModel();
+    LoginBodyModel body = new LoginBodyModel();
 
     @Test
     @Tag("sanity")
     @DisplayName("Проверка авторизации пользователя")
     @Description("Авторизация")
     public void positiveLoginTest() {
-        loginBody.setEmail(login).setPassword(password);
-        val response = sendLogin(loginBody);
+        body.setEmail(login).setPassword(password);
+        val response = sendLogin(body);
         assertPositiveLoginApi(response);
     }
 
@@ -39,8 +40,8 @@ public class LoginTests extends TestBase{
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
     public void negativeLoginTest(String user, String pass, String responseErrorText) {
-        loginBody.setEmail(user).setPassword(pass);
-        val response = sendLoginRaw(loginBody);
+        body.setEmail(user).setPassword(pass);
+        val response = sendLoginRaw(body);
         assertNegativeLoginApi(response, responseErrorText);
     }
 

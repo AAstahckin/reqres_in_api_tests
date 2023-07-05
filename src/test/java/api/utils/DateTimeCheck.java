@@ -1,6 +1,5 @@
 package api.utils;
 
-import io.qameta.allure.Allure;
 import org.junit.jupiter.api.Assertions;
 
 import java.text.SimpleDateFormat;

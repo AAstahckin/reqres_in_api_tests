@@ -2,7 +2,9 @@ package api.service;
 
 import api.models.RegisterResponseModel;
 import io.restassured.response.Response;
+
 import static api.constans.Urls.*;
+import static api.helpers.CustomsTextsSteps.postRequest;
 import static api.specs.Specs.requestSpec;
 import static api.specs.Specs.response200Spec;
 import static io.qameta.allure.Allure.step;
@@ -10,12 +12,8 @@ import static io.restassured.RestAssured.given;
 
 public class RequestRegisterUser {
 
-    public static String stepSendPostRequest(String value) {
-        return String.format("Выполняется вызов метода POST, на %s", value);
-    }
-
     public static RegisterResponseModel sendRegisterUser(Object body) {
-        return step(stepSendPostRequest(URL_REGISTER.getUrl()), () ->
+        return step(postRequest(URL_REGISTER.getUrl()), () ->
                 given(requestSpec)
                         .when()
                         .body(body)
@@ -28,7 +26,7 @@ public class RequestRegisterUser {
     }
 
     public static Response sendRegisterUserRaw(Object body) {
-        return step(stepSendPostRequest(URL_REGISTER.getUrl()), () ->
+        return step(postRequest(URL_REGISTER.getUrl()), () ->
                 given(requestSpec)
                         .when()
                         .body(body)

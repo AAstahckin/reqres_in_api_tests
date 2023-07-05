@@ -6,9 +6,10 @@ import lombok.Getter;
 @Getter
 public class UserResponseModel {
 
-	@JsonProperty("data")
-	private DataUserResponseModel dataUserResponseModel;
+    @JsonProperty("data")
+    private DataUserResponseModel dataUserResponseModel;
 
-	@JsonProperty("support")
-	private UserSupportResponseModel userSupportResponseModel;
+    @JsonProperty("support")
+    private UserSupportResponseModel userSupportResponseModel;
+
 }
