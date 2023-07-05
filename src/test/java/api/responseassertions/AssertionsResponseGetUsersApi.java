@@ -3,45 +3,44 @@ package api.responseassertions;
 import api.models.getuser.UserResponseModel;
 import api.models.getusers.UsersResponseModel;
 import api.data.UsersDataValues;
-import io.qameta.allure.Allure;
 
 import static api.constans.OtherTexts.TEXT_SUPPORT;
 import static api.constans.OtherTexts.URL_SUPPORT;
+import static api.helpers.CustomsTextsSteps.stepMatchingParameter;
+import static api.helpers.CustomsTextsSteps.stepMatchingParameterId;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AssertionsResponseGetUsersApi {
 
     public static void assertGetRandomUser(UsersResponseModel response, UsersDataValues randomUserId) {
-        Allure.step("Проверяем пользователя с " + randomUserId.getId() + " id" );
-        step("Проверяем что id соответствует ", () ->
+        step(stepMatchingParameterId(response.getData().get(randomUserId.ordinal()).getId()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getId(), randomUserId.getId()));
-        step("Проверяем что email соответствует ", () ->
+        step(stepMatchingParameter(response.getData().get(randomUserId.ordinal()).getEmail()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getEmail(), randomUserId.getEmail()));
-        step("Проверяем что firstName соответствует ", () ->
+        step(stepMatchingParameter(response.getData().get(randomUserId.ordinal()).getFirstName()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getFirstName(), randomUserId.getFirstName()));
-        step("Проверяем что lastName соответствует ", () ->
+        step(stepMatchingParameter(response.getData().get(randomUserId.ordinal()).getLastName()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getLastName(), randomUserId.getLastName()));
-        step("Проверяем что avatar соответствует ", () ->
+        step(stepMatchingParameter(response.getData().get(randomUserId.ordinal()).getAvatar()), () ->
                 assertEquals(response.getData().get(randomUserId.ordinal()).getAvatar(), randomUserId.getAvatar()));
 
     }
 
     public static void assertGetUser(UserResponseModel response, UsersDataValues randomUserId) {
-        Allure.step("Проверяем пользователя с " + randomUserId.getId() + " id" );
-        step("Проверяем что id соответствует ", () ->
+        step(stepMatchingParameterId(response.getDataUserResponseModel().getId()), () ->
                 assertEquals(response.getDataUserResponseModel().getId(), randomUserId.getId()));
-        step("Проверяем что email соответствует ", () ->
+        step(stepMatchingParameter(response.getDataUserResponseModel().getEmail()), () ->
                 assertEquals(response.getDataUserResponseModel().getEmail(), randomUserId.getEmail()));
-        step("Проверяем что firstName соответствует ", () ->
+        step(stepMatchingParameter(response.getDataUserResponseModel().getFirstName()), () ->
                 assertEquals(response.getDataUserResponseModel().getFirstName(), randomUserId.getFirstName()));
-        step("Проверяем что lastName соответствует ", () ->
+        step(stepMatchingParameter(response.getDataUserResponseModel().getLastName()), () ->
                 assertEquals(response.getDataUserResponseModel().getLastName(), randomUserId.getLastName()));
-        step("Проверяем что avatar соответствует ", () ->
+        step(stepMatchingParameter(response.getDataUserResponseModel().getAvatar()), () ->
                 assertEquals(response.getDataUserResponseModel().getAvatar(), randomUserId.getAvatar()));
-        step("Проверяем что url соответствует ", () ->
+        step(stepMatchingParameter(response.getUserSupportResponseModel().getUrl()), () ->
                 assertEquals(response.getUserSupportResponseModel().getUrl(), URL_SUPPORT.getValue()));
-        step("Проверяем что text соответствует ", () ->
+        step(stepMatchingParameter(response.getUserSupportResponseModel().getText()), () ->
                 assertEquals(response.getUserSupportResponseModel().getText(), TEXT_SUPPORT.getValue()));
     }
 

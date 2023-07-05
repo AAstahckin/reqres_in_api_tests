@@ -21,15 +21,15 @@ import static api.constans.ErrorsTexts.*;
 @DisplayName("Регистрация пользователя API POST /register")
 public class RegisterUserTests extends TestBase {
 
-    RegisterBodyModel bodyModel = new RegisterBodyModel();
+    RegisterBodyModel body = new RegisterBodyModel();
 
     @Test
     @Tag("sanity")
     @DisplayName("Регистрация пользователя")
     @Description("Позитивный сценарий")
     public void positiveRegisterTest() {
-        bodyModel.setEmail(login).setPassword(password);
-        val response = sendRegisterUser(bodyModel);
+        body.setEmail(login).setPassword(password);
+        val response = sendRegisterUser(body);
         assertPositiveRegisterApi(response);
     }
 
@@ -38,8 +38,8 @@ public class RegisterUserTests extends TestBase {
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
     public void negativeRegisterTest(String user, String pass, String responseErrorText) {
-        bodyModel.setEmail(user).setPassword(pass);
-        val response = sendRegisterUserRaw(bodyModel);
+        body.setEmail(user).setPassword(pass);
+        val response = sendRegisterUserRaw(body);
         assertNegativeRegisterApi(response, responseErrorText);
     }
 

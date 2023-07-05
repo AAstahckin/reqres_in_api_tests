@@ -20,7 +20,7 @@ import static api.utils.RandomUtils.getRandomText;
 @DisplayName("Изменение пользователя API PUT /users/id")
 public class UpdateUsersTests extends TestBase {
 
-    CreateUsersBodyModel bodyModel = new CreateUsersBodyModel();
+    CreateUsersBodyModel body = new CreateUsersBodyModel();
     static Faker faker = new Faker();
 
     @Test
@@ -28,9 +28,9 @@ public class UpdateUsersTests extends TestBase {
     @DisplayName("Изменение пользователя")
     @Description("ПозитивнВ сценарий")
     public void positiveUpdateUserTest() {
-        bodyModel.setName(faker.name().firstName()).setJob(faker.artist().name());
-        val response = sendUpdateUser(bodyModel, faker.random().nextInt(1,100));
-        assertUpdateUserTestApi(response, bodyModel);
+        body.setName(faker.name().firstName()).setJob(faker.artist().name());
+        val response = sendUpdateUser(body, faker.random().nextInt(1,100));
+        assertUpdateUserTestApi(response, body);
 
     }
 
@@ -40,9 +40,9 @@ public class UpdateUsersTests extends TestBase {
     @ParameterizedTest(name = "[Name = {0}, Job = {1}]")
     @MethodSource("checkOutputParamsForPage")
     public void negativeUpdateUserTests(String valueName,String valueJob) {
-        bodyModel.setName(valueName).setJob(valueJob);
-        val response = sendUpdateUser(bodyModel, faker.random().nextInt(1,100));
-        assertUpdateUserTestApi(response, bodyModel);
+        body.setName(valueName).setJob(valueJob);
+        val response = sendUpdateUser(body, faker.random().nextInt(1,100));
+        assertUpdateUserTestApi(response, body);
     }
 
     private static Stream<Arguments> checkOutputParamsForPage() {

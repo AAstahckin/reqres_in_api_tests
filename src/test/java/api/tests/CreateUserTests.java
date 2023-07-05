@@ -20,7 +20,7 @@ import static api.utils.RandomUtils.getRandomText;
 @DisplayName("Создание юзера API POST /users")
 public class CreateUserTests extends TestBase {
 
-    CreateUsersBodyModel userBody = new CreateUsersBodyModel();
+    CreateUsersBodyModel body = new CreateUsersBodyModel();
     static Faker faker = new Faker();
 
     @Test
@@ -28,9 +28,9 @@ public class CreateUserTests extends TestBase {
     @Description("Позитивный сценарий")
     @Tag("sanity")
     public void positiveCreateUserTest() {
-        userBody.setName(faker.name().firstName()).setJob(faker.job().position());
-        val response = sendCreateUser(userBody);
-        assertPositiveCreateUserApi(response, userBody);
+        body.setName(faker.name().firstName()).setJob(faker.job().position());
+        val response = sendCreateUser(body);
+        assertPositiveCreateUserApi(response, body);
 
     }
 
@@ -39,9 +39,9 @@ public class CreateUserTests extends TestBase {
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
     public void negativeLoginTest(String name, String job) {
-        userBody.setName(name).setJob(job);
-        val response = sendCreateUser(userBody);
-        assertPositiveCreateUserApi(response, userBody);
+        body.setName(name).setJob(job);
+        val response = sendCreateUser(body);
+        assertPositiveCreateUserApi(response, body);
     }
 
     private static Stream<Arguments> submitIncorrectParameters() {
