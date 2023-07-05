@@ -4,7 +4,6 @@ import api.tests.TestBase;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-
 import static api.helpers.CustomAllureListener.withCustomTemplates;
 import static api.constans.HttpStatus.*;
 import static io.restassured.RestAssured.*;
@@ -36,18 +35,6 @@ public class Specs extends TestBase {
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(NO_CONTENT.getCode())
-            .build();
-
-    public static ResponseSpecification response400Spec = new ResponseSpecBuilder()
-            .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(BAD_REQUEST.getCode())
-            .build();
-
-    public static ResponseSpecification response404Spec = new ResponseSpecBuilder()
-            .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(NOT_FOUND.getCode())
             .build();
 
 }

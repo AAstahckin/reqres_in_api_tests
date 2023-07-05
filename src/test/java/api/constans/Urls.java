@@ -7,7 +7,7 @@ public enum Urls {
 
     URL_REGISTER("/register"),
     URL_LOGIN("/login"),
-    URL_USER("/users/"),
+    URL_USER("/users/%d"),
     URL_USERS("/users");
 
     final String url;

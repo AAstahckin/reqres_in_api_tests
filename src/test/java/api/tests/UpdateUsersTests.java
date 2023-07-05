@@ -1,7 +1,6 @@
 package api.tests;
 
 import api.models.*;
-import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
@@ -13,15 +12,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
-import static api.constans.Urls.URL_USER;
 import static api.responseassertions.AssertionsResponseUpdateUsers.assertUpdateUserTestApi;
-import static api.specs.Specs.response200Spec;
+import static api.service.RequestUpdateUser.sendUpdateUser;
 import static api.utils.RandomUtils.getRandomText;
 
 @Story("Изменение пользователя")
-@DisplayName("Изменение пользователя API PUT /users/")
+@DisplayName("Изменение пользователя API PUT /users/id")
 public class UpdateUsersTests extends TestBase {
-    static CreateUsersBodyModel bodyModel = new CreateUsersBodyModel();
+
+    CreateUsersBodyModel bodyModel = new CreateUsersBodyModel();
     static Faker faker = new Faker();
 
     @Test
@@ -30,8 +29,7 @@ public class UpdateUsersTests extends TestBase {
     @Description("ПозитивнВ сценарий")
     public void positiveUpdateUserTest() {
         bodyModel.setName(faker.name().firstName()).setJob(faker.artist().name());
-        val response = Requests.sendPutRequest(
-                URL_USER.getUrl() + faker.random().nextInt(1,100), bodyModel, UpdateUserResponseModel.class, response200Spec);
+        val response = sendUpdateUser(bodyModel, faker.random().nextInt(1,100));
         assertUpdateUserTestApi(response, bodyModel);
 
     }
@@ -43,8 +41,7 @@ public class UpdateUsersTests extends TestBase {
     @MethodSource("checkOutputParamsForPage")
     public void negativeUpdateUserTests(String valueName,String valueJob) {
         bodyModel.setName(valueName).setJob(valueJob);
-        val response = Requests.sendPutRequest(
-                URL_USER.getUrl() + faker.random().nextInt(1,100), bodyModel, UpdateUserResponseModel.class, response200Spec);
+        val response = sendUpdateUser(bodyModel, faker.random().nextInt(1,100));
         assertUpdateUserTestApi(response, bodyModel);
     }
 

@@ -1,8 +1,6 @@
 package api.tests;
 
-import api.models.CreateUserResponseModel;
 import api.models.CreateUsersBodyModel;
-import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
@@ -13,12 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
 import java.util.stream.Stream;
-
 import static api.responseassertions.AssertionsResponseCreateUserApi.assertPositiveCreateUserApi;
-import static api.specs.Specs.response201Spec;
-import static api.constans.Urls.URL_USERS;
+import static api.service.RequestCreateUser.sendCreateUser;
 import static api.utils.RandomUtils.getRandomText;
 
 @Story("Создание юзера")
@@ -34,8 +29,7 @@ public class CreateUserTests extends TestBase {
     @Tag("sanity")
     public void positiveCreateUserTest() {
         userBody.setName(faker.name().firstName()).setJob(faker.job().position());
-        val response = Requests.sendPostRequest(
-                URL_USERS.getUrl(), userBody, CreateUserResponseModel.class, response201Spec);
+        val response = sendCreateUser(userBody);
         assertPositiveCreateUserApi(response, userBody);
 
     }
@@ -46,8 +40,7 @@ public class CreateUserTests extends TestBase {
     @MethodSource("submitIncorrectParameters")
     public void negativeLoginTest(String name, String job) {
         userBody.setName(name).setJob(job);
-        val response = Requests.sendPostRequest(
-                URL_USERS.getUrl(), userBody, CreateUserResponseModel.class, response201Spec);
+        val response = sendCreateUser(userBody);
         assertPositiveCreateUserApi(response, userBody);
     }
 

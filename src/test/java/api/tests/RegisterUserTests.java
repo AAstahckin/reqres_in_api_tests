@@ -1,8 +1,6 @@
 package api.tests;
 
 import api.models.RegisterBodyModel;
-import api.models.RegisterResponseModel;
-import api.service.Requests;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
@@ -14,12 +12,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
-
 import static api.responseassertions.AssertionsResponseRegisterApi.*;
-import static api.specs.Specs.response200Spec;
-import static api.specs.Specs.response400Spec;
+import static api.service.RequestRegisterUser.sendRegisterUser;
+import static api.service.RequestRegisterUser.sendRegisterUserRaw;
 import static api.constans.ErrorsTexts.*;
-import static api.constans.Urls.URL_REGISTER;
 
 @Story("Регистрация пользователя")
 @DisplayName("Регистрация пользователя API POST /register")
@@ -33,8 +29,7 @@ public class RegisterUserTests extends TestBase {
     @Description("Позитивный сценарий")
     public void positiveRegisterTest() {
         bodyModel.setEmail(login).setPassword(password);
-        val response = Requests.sendPostRequest(
-                URL_REGISTER.getUrl(), bodyModel, RegisterResponseModel.class, response200Spec);
+        val response = sendRegisterUser(bodyModel);
         assertPositiveRegisterApi(response);
     }
 
@@ -44,8 +39,7 @@ public class RegisterUserTests extends TestBase {
     @MethodSource("submitIncorrectParameters")
     public void negativeRegisterTest(String user, String pass, String responseErrorText) {
         bodyModel.setEmail(user).setPassword(pass);
-        val response = Requests.sendPostRequest(
-                URL_REGISTER.getUrl(), bodyModel, RegisterResponseModel.class, response400Spec);
+        val response = sendRegisterUserRaw(bodyModel);
         assertNegativeRegisterApi(response, responseErrorText);
     }
 

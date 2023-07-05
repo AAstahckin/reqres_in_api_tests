@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class AssertionsResponseCreateUserApi {
 
     public static void assertPositiveCreateUserApi(CreateUserResponseModel response, CreateUsersBodyModel userBody) {
-        step("Проверяем что " + userBody.getName() + " присутствует в ответе ", () ->
+        step("Проверяем что " + userBody.getName() + " соответствует", () ->
                 assertEquals(response.getName(), userBody.getName()));
-        step("Проверяем что " + userBody.getJob() + " присутствует в ответе ", () ->
+        step("Проверяем что " + userBody.getJob() + " соответствует", () ->
                 assertEquals(response.getJob(), userBody.getJob()));
-        step("Проверяем что " + response.getId() + " присутствует в ответе", () ->
+        step("Проверяем что " + response.getId() + " соответствует", () ->
                 assertNotNull(response.getId()));
         timeDifferenceCreateForServ(response.getCreatedAt());
     }
