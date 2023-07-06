@@ -55,5 +55,4 @@ public class CustomsTextsSteps {
         return String.format("Выполняется вызов метода PUT, на %s", value);
     }
 
-
 }
