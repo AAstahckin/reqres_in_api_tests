@@ -14,9 +14,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static api.data.TestDataValues.parameterizedNegativeData;
 import static api.responseassertions.AssertionsResponseUpdateUsers.assertUpdateUserTestApi;
 import static api.service.RequestUpdateUser.putUpdateUser;
-import static api.utils.RandomUtils.getRandomText;
 
 @Story("Изменение пользователя")
 @DisplayName("Изменение пользователя API PUT /users/id")
@@ -47,16 +47,7 @@ public class PutUpdateUsersTests extends TestBase {
     }
 
     private static Stream<Arguments> checkOutputParamsForPage() {
-        return Stream.of(
-                Arguments.of("!@%&^%*(!@(&*", "()*^*&%&*^@)"),
-                Arguments.of("КУАГУРУСУПЕР", "КУАГУРУСУПЕР"),
-                Arguments.of("qa.guru super", "qa.guru super"),
-                Arguments.of(" ", " "),
-                Arguments.of(getRandomText(100), getRandomText(100)),
-                Arguments.of(null, null),
-                Arguments.of(null, faker.job().position()),
-                Arguments.of(faker.job().position(), null),
-                Arguments.of("4124123", "41251253"));
+        return parameterizedNegativeData();
     }
 
 }

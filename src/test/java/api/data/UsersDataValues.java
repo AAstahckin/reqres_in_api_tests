@@ -10,7 +10,7 @@ public enum UsersDataValues {
     EMMA_WONG(3, "emma.wong@reqres.in", "Emma", "Wong", "3-image.jpg"),
     EVE_HOLT(4, "eve.holt@reqres.in", "Eve", "Holt", "4-image.jpg"),
     CHARLES_MORRIS(5, "charles.morris@reqres.in", "Charles", "Morris", "5-image.jpg"),
-    TRACEY_RAMOS(6, "tracey.ramos@reqres.in", "Tracey", "Ramos", "-image.jpg"),
+    TRACEY_RAMOS(6, "tracey.ramos@reqres.in", "Tracey", "Ramos", "6-image.jpg"),
     MICHAEL_LAWSON(7, "michael.lawson@reqres.in", "Michael", "Lawson", "7-image.jpg"),
     LINDSAY_FERGUSON(8, "lindsay.ferguson@reqres.in", "Lindsay", "Ferguson", "8-image.jpg"),
     TOBIAS_FUNKE(9, "tobias.funke@reqres.in", "Tobias", "Funke", "9-image.jpg"),
