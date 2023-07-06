@@ -133,5 +133,5 @@ gradle clean test
 После завершения сборки, бот, созданный в <code>Telegram</code>, автоматически обрабатывает и отправляет сообщение с
 результатом.
 <p align="center">
-<img title="Allure TestOps DashBoard" src="media/screens/Telegram.png">
+<img title="Telegram" src="media/screens/Telegram.png">
 </p>

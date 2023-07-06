@@ -2,8 +2,7 @@ package api.tests;
 
 import api.data.UsersDataValues;
 import com.github.javafaker.Faker;
-import io.qameta.allure.Description;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -23,6 +22,7 @@ import static api.utils.RandomUtils.getRandomUserForId;
 
 @Story("Список пользователей")
 @DisplayName("Список пользователей API GET /users?per_page= и /users?page=")
+@Owner("Aleksey_Astashkin")
 public class GetUsersTests extends TestBase {
 
     Map<String, Integer> queryParam = new HashMap<>();
@@ -30,6 +30,7 @@ public class GetUsersTests extends TestBase {
 
     @DisplayName("Список пользователей")
     @Description("Позитивный сценарий")
+    @Severity(SeverityLevel.MINOR)
     @ParameterizedTest(name = " /users?per_page")
     @EnumSource(value = UsersDataValues.class)
     public void testsGetUsersPerPage(UsersDataValues usersDataValues) {
@@ -40,6 +41,7 @@ public class GetUsersTests extends TestBase {
 
     @DisplayName("Список пользователей")
     @Description("Позитивный сценарий")
+    @Severity(SeverityLevel.MINOR)
     @ParameterizedTest(name = " /users?page={0}")
     @MethodSource("checkOutputParamsForPage")
     public void testsGetUsersPage(int page, int count) {
@@ -55,6 +57,7 @@ public class GetUsersTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Проверка рандомного пользователя из списка")
     @Description("Проверка рандомного пользователя")
     @Tag("sanity")

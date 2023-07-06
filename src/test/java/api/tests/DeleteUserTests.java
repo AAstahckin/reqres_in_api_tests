@@ -1,7 +1,6 @@
 package api.tests;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -14,9 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Story("Удаление пользователя")
 @DisplayName("Удаление пользователя API DELETE users/")
+@Owner("Aleksey_Astashkin")
 public class DeleteUserTests extends TestBase {
 
     @Tag("sanity")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Удаление пользователя с id")
     @Description("Позитивный сценарий")
     @ParameterizedTest(name = " = [{0}]")

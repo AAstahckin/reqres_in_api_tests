@@ -2,8 +2,7 @@ package api.tests;
 
 import api.models.LoginBodyModel;
 import com.github.javafaker.Faker;
-import io.qameta.allure.Description;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -21,11 +20,13 @@ import static api.constans.ErrorsTexts.*;
 
 @Story("Авторизация")
 @DisplayName("Авторизация API POST /login")
+@Owner("Aleksey_Astashkin")
 public class LoginTests extends TestBase {
 
     LoginBodyModel body = new LoginBodyModel();
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Tag("sanity")
     @DisplayName("Проверка авторизации пользователя")
     @Description("Авторизация")
@@ -37,6 +38,7 @@ public class LoginTests extends TestBase {
 
     @DisplayName("Негативный сценарий авторизации ")
     @Description("Проверка негативных сценариев с 400")
+    @Severity(SeverityLevel.NORMAL)
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
     public void negativeLoginTest(String user, String pass, String responseErrorText) {

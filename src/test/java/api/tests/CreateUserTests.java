@@ -2,8 +2,7 @@ package api.tests;
 
 import api.models.CreateUsersBodyModel;
 import com.github.javafaker.Faker;
-import io.qameta.allure.Description;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -20,12 +19,14 @@ import static api.service.RequestCreateUser.sendCreateUser;
 
 @Story("Создание юзера")
 @DisplayName("Создание юзера API POST /users")
+@Owner("Aleksey_Astashkin")
 public class CreateUserTests extends TestBase {
 
     CreateUsersBodyModel body = new CreateUsersBodyModel();
     static Faker faker = new Faker();
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Проверка создания пользователя")
     @Description("Позитивный сценарий")
     @Tag("sanity")
@@ -36,6 +37,7 @@ public class CreateUserTests extends TestBase {
 
     }
 
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Негативный сценарий создания пользователя")
     @Description("Негативный сценарий")
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")

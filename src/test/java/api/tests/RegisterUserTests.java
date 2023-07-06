@@ -2,8 +2,7 @@ package api.tests;
 
 import api.models.RegisterBodyModel;
 import com.github.javafaker.Faker;
-import io.qameta.allure.Description;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -22,12 +21,14 @@ import static api.utils.RandomUtils.getRandomUserForId;
 
 @Story("Регистрация пользователя")
 @DisplayName("Регистрация пользователя API POST /register")
+@Owner("Aleksey_Astashkin")
 public class RegisterUserTests extends TestBase {
 
     RegisterBodyModel body = new RegisterBodyModel();
     Faker faker = new Faker();
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Tag("sanity")
     @DisplayName("Регистрация пользователя")
     @Description("Позитивный сценарий")
@@ -40,6 +41,7 @@ public class RegisterUserTests extends TestBase {
 
     @DisplayName("Регистрация пользователя с параметрами : ")
     @Description("Негативный сценарий")
+    @Severity(SeverityLevel.NORMAL)
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
     public void negativeRegisterTest(String user, String pass, String responseErrorText) {
