@@ -52,7 +52,7 @@ gradle clean test
 
 При выполнении команды тесты запустятся локально.
 
-## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/Jenkins.svg"> Сборка в Jenkins
+## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/Jenkins.svg"> [Сборка в Jenkins](https://jenkins.autotests.cloud/job/C19-Aleksey_Astashkin-reqresIN/build?delay=0sec)
 
 ### Параметры сборки
 
@@ -89,7 +89,7 @@ gradle clean test
 <img title="Test Results in Alure" src="media/screens/AllureSuites.png">
 </p>
 
-## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/Allure_TO.svg"> Интеграция с Allure TestOps
+## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/Allure_TO.svg"> [Интеграция с Allure TestOps](https://allure.autotests.cloud/project/3457/launches)
 
 #### На вкладке Dashboards отображается:
 
