@@ -120,7 +120,7 @@ gradle clean test
 <img title="Allure TestOps DashBoard" src="media/screens/AllureTestCases.png">
 </p>
 
-## <img width="4%" style="vertical-align:middle" title="Jira" src="media/logo/Jira.svg"> Интеграция с Jira
+## <img width="4%" style="vertical-align:middle" title="Jira" src="media/logo/Jira.svg"> [Интеграция с Jira](https://jira.autotests.cloud/browse/HOMEWORK-772)
 
 Реализована интеграция <code>Allure TestOps</code> с <code>Jira</code>. В задаче отображаются прикреплённые к ней
 тест-кейсы, а также результаты запусков/прохождения тестов.
