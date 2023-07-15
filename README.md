@@ -37,6 +37,17 @@
 - Осуществлена интеграция с [Allure TestOps](https://docs.qameta.io/allure/)
 - Также интегрирован с инструментом управления проектами [jira](https://www.atlassian.com/ru/software/jira)
 
+## :spiral_notepad: Список тестов:
+#### В каждом тесте, реализованы негативные и позитивные сценарии
+
+:white_check_mark: Авторизация API POST /login <br />
+:white_check_mark: Изменение пользователя API PUT <br />
+:white_check_mark: Получение пользователя API GET <br />
+:white_check_mark: Регистрация пользователя API POST <br />
+:white_check_mark: Создание юзера API POST <br />
+:white_check_mark: Список пользователей API GET <br />
+:white_check_mark: Удаление пользователя API DELETE <br />
+
 ## :arrow_forward: Запуск автотестов
 
 ### Варианты запуска тестов

@@ -20,4 +20,5 @@ public class DataUserResponseModel {
 
     @JsonProperty("email")
     private String email;
+
 }
