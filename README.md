@@ -37,7 +37,7 @@
 - Осуществлена интеграция с [Allure TestOps](https://docs.qameta.io/allure/)
 - Также интегрирован с инструментом управления проектами [jira](https://www.atlassian.com/ru/software/jira)
 
-## :spiral_notepad: Список тестов:
+## :spiral_notepad: Список тестов
 #### В каждом тесте, реализованы негативные и позитивные сценарии
 
 :white_check_mark: Авторизация API POST /login <br />
