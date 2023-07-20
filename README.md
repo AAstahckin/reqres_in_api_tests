@@ -15,17 +15,39 @@
 ## :computer: Используемый стек
 
 <p align="center">
+<a href="https://www.jetbrains.com/">
 <img width="6%" title="IntelliJ IDEA" src="media/logo/Idea.svg">
+</a>
+<a href="https://www.java.com/">
 <img width="6%" title="Java" src="media/logo/Java.svg">
+</a>
+<a href="https://docs.qameta.io/allure/">
 <img width="6%" title="Allure Report" src="media/logo/Allure.svg">
+</a>
+<a href="https://qameta.io/">
 <img width="5%" title="Allure TestOps" src="media/logo/Allure_TO.svg">
+</a>
+<a href="https://gradle.org/">
 <img width="6%" title="Gradle" src="media/logo/Gradle.svg">
-<img width="6%" title="JUnit5" src="media/logo/Junit5.svg">
-<img width="6%" title="RestAssured" src="media/logo/RestAssured.svg">
+</a>
+<a href="https://junit.org/junit5/">
+<img width="6%" title="JUnit5" src="media/logo/JUnit5.svg">
+</a>
+<a href="https://rest-assured.io/">
+<img width="6%" title="Selenide" src="media/logo/RestAssured.svg">
+</a>
+<a href="https://github.com/">
 <img width="6%" title="GitHub" src="media/logo/GitHub.svg">
+</a>
+<a href="https://www.jenkins.io/">
 <img width="6%" title="Jenkins" src="media/logo/Jenkins.svg">
+</a>
+<a href="https://web.telegram.org/">
 <img width="6%" title="Telegram" src="media/logo/Telegram.svg">
+</a>
+<a href="https://www.atlassian.com/ru/software/jira">
 <img width="5%" title="Jira" src="media/logo/Jira.svg">
+</a>
 </p>
 
 - Тесты в данном проекте написаны на языке <code>Java</code> с использованием фреймворка для
@@ -74,7 +96,7 @@ gradle clean test
 <img title="Jenkins Build" src="media/screens/jenkins build.png">
 </p>
 
-## <img width="4%" style="vertical-align:middle" title="Allure Report" src="media/logo/Allure.svg"> Пример Allure-отчета
+## <img width="4%" style="vertical-align:middle" title="Allure Report" src="media/logo/Allure.svg"> [Пример Allure-отчета](https://jenkins.autotests.cloud/job/C19-Aleksey_Astashkin-reqresIN/34/allure/)
 
 #### Главная страница отчета Allure содержит следующие блоки:
 
