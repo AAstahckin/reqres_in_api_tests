@@ -31,7 +31,7 @@
 <img width="6%" title="Gradle" src="media/logo/Gradle.svg">
 </a>
 <a href="https://junit.org/junit5/">
-<img width="6%" title="JUnit5" src="media/logo/JUnit5.svg">
+<img width="6%" title="JUnit5" src="media/logo/Junit5.svg">
 </a>
 <a href="https://rest-assured.io/">
 <img width="6%" title="Selenide" src="media/logo/RestAssured.svg">
