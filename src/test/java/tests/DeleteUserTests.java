@@ -22,7 +22,7 @@ public class DeleteUserTests extends TestBase {
     @Description("Позитивный сценарий")
     @ParameterizedTest(name = " = [{0}]")
     @ValueSource(strings = {"100", "0", "-1", "-2147483648", "2147483647"})
-    public void deleteUserTests(int userId) {
+    public void deleteUserTest(int userId) {
         val response = sendDeleteUserRaw(userId);
         assertEquals(response.statusCode(), NO_CONTENT.getCode());
     }

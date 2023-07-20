@@ -42,7 +42,7 @@ public class CreateUserTests extends TestBase {
     @Description("Негативный сценарий")
     @ParameterizedTest(name = "[user: {0}; pass:{1}]")
     @MethodSource("submitIncorrectParameters")
-    public void negativeLoginTest(String name, String job) {
+    public void negativeCreateUserTest(String name, String job) {
         body.setName(name).setJob(job);
         val response = sendCreateUser(body);
         assertPositiveCreateUserApi(response, body);

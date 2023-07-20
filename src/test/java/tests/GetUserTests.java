@@ -25,7 +25,7 @@ public class GetUserTests extends TestBase {
     @Tag("sanity")
     @DisplayName("Получить рандомного пользователя по id")
     @Description("Позитивный сценарий")
-    public void positiveTestGetUser() {
+    public void positiveGetUserTest() {
         val randomUserId = getRandomUserForId();
         val response = sendGetUser(randomUserId.getId());
         assertGetUser(response, randomUserId);
@@ -37,7 +37,7 @@ public class GetUserTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @ParameterizedTest(name = "[{0}]")
     @ValueSource(strings = {"100", "0", "-1", "-2147483648", "2147483647"})
-    public void negativeTestGetUser(int value) {
+    public void negativeGetUserTest(int value) {
         val response = sendGetRaw(value);
         assertEquals(response.statusCode(), NOT_FOUND.getCode());
     }

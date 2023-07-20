@@ -42,7 +42,7 @@ public class PatchUpdateUsersTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @ParameterizedTest(name = "[Name = {0}, Job = {1}]")
     @MethodSource("checkOutputParamsForPage")
-    public void negativeUpdateUserTests(String valueName, String valueJob) {
+    public void negativeUpdateUserTest(String valueName, String valueJob) {
         body.setName(valueName).setJob(valueJob);
         val response = patchUpdateUser(body, faker.random().nextInt(1, 100));
         assertUpdateUserTestApi(response, body);

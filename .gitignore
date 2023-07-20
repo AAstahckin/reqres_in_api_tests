@@ -8,3 +8,4 @@ settings.gradle
 gradlew
 gradlew.bat
 /out
+credentials.properties
