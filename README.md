@@ -108,9 +108,6 @@ gradle clean test
 - <code><strong>*CATEGORIES*</strong></code> - отображает распределение неудачных тестов по типам дефектов
 
 <p align="center">
-  <img src="images/screens//AllureReport.png" width="950">
-</p>
-<p align="center">
 <img title="Allure Overview" src="media/screens/Allure Overview.png">
 </p>
 
