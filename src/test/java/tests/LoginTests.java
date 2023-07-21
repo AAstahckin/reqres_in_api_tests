@@ -52,6 +52,4 @@ public class LoginTests extends TestBase {
         return loginSubmitIncorrectParameters();
     }
 
-
-
 }
