@@ -62,7 +62,7 @@
 ## :spiral_notepad: Список тестов
 #### В каждом тесте, реализованы негативные и позитивные сценарии
 
-:white_check_mark: Авторизация API POST /login <br />
+:white_check_mark: Авторизация API POST <br />
 :white_check_mark: Изменение пользователя API PUT <br />
 :white_check_mark: Получение пользователя API GET <br />
 :white_check_mark: Регистрация пользователя API POST <br />
